@@ -42,11 +42,6 @@ export function ShopCard({ shop }: ShopCardProps) {
               >
                 {shop.name}
               </Link>
-              {shop.sponsored ? (
-                <span className="rounded-full bg-[color:var(--accent-soft)] px-3 py-1 text-xs font-semibold text-[color:var(--accent-dark)]">
-                  Sponsored
-                </span>
-              ) : null}
               <span
                 className={[
                   "rounded-full px-3 py-1 text-xs font-semibold",
@@ -99,10 +94,7 @@ export function ShopCard({ shop }: ShopCardProps) {
         </div>
 
         <div className="mt-6 flex flex-col gap-3 border-t border-[color:var(--line)] pt-5 sm:flex-row sm:items-center sm:justify-between">
-          <p className="text-sm text-[color:var(--success)]">
-            {shop.claimed ? "Claimed profile" : "Unclaimed profile"}
-          </p>
-          <div className="flex flex-wrap gap-3">
+          <div className="flex flex-wrap gap-3 sm:ml-auto">
             <a
               href={shop.callUrl}
               onClick={() =>

@@ -1,5 +1,6 @@
 "use client";
 
+import { useState } from "react";
 import { trackEvent } from "@/lib/analytics";
 
 type SearchBarProps = {
@@ -11,14 +12,17 @@ export function SearchBar({
   defaultLocation = "Near me",
   compact = false
 }: SearchBarProps) {
+  const [location, setLocation] = useState(
+    defaultLocation === "Near me" ? "" : defaultLocation
+  );
+
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
-    const formData = new FormData(event.currentTarget);
-    const location = String(formData.get("location") ?? "").trim();
+    const normalizedLocation = location.trim();
 
     trackEvent("search_submitted", {
       query: "Haircut",
-      location,
-      search_mode: /^\d{5}$/.test(location) ? "zip" : "city_or_area"
+      location: normalizedLocation,
+      search_mode: /^\d{5}$/.test(normalizedLocation) ? "zip" : "city_or_area"
     });
   };
 
@@ -35,13 +39,14 @@ export function SearchBar({
 
       <label className="flex flex-col gap-2 rounded-[22px] border border-transparent bg-[color:var(--panel-strong)] px-4 py-3 transition focus-within:border-[color:var(--accent)]">
         <span className="text-xs font-semibold uppercase tracking-[0.2em] text-[color:var(--muted)]">
-          Location
+          ZIP or city
         </span>
         <input
           name="location"
-          defaultValue={defaultLocation}
+          value={location}
+          onChange={(event) => setLocation(event.target.value)}
           className="bg-transparent text-base font-medium outline-none"
-          placeholder="Enter your city or neighborhood"
+          placeholder="ZIP or city"
           type="text"
         />
       </label>

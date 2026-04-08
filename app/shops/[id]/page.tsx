@@ -103,16 +103,6 @@ export default async function ShopDetailPage({ params }: ShopDetailPageProps) {
               </p>
               <div className="mt-4 flex flex-wrap items-center gap-3">
                 <h1 className="text-4xl font-semibold tracking-tight sm:text-5xl">{shop.name}</h1>
-                {shop.sponsored ? (
-                  <span className="rounded-full bg-[color:var(--accent-soft)] px-3 py-1 text-sm font-semibold text-[color:var(--accent-dark)]">
-                    Sponsored listing
-                  </span>
-                ) : null}
-                {shop.claimed ? (
-                  <span className="rounded-full bg-sky-100 px-3 py-1 text-sm font-semibold text-sky-800">
-                    Claimed profile
-                  </span>
-                ) : null}
                 <span
                   className={[
                     "rounded-full px-3 py-1 text-sm font-semibold",
@@ -258,26 +248,6 @@ export default async function ShopDetailPage({ params }: ShopDetailPageProps) {
                   </TrackedExternalLink>
                 </div>
               </div>
-
-              {!shop.claimed ? (
-                <div className="mt-6 rounded-[28px] border border-dashed border-[color:var(--line)] bg-white px-5 py-5">
-                  <p className="text-sm font-semibold uppercase tracking-[0.2em] text-[color:var(--muted)]">
-                    Own this shop?
-                  </p>
-                  <h3 className="mt-3 text-xl font-semibold tracking-tight">
-                    Claim this OpenChair page and upgrade it self-serve
-                  </h3>
-                  <p className="mt-3 text-sm leading-7 text-[color:var(--muted)]">
-                    Add your booking link, improve availability signals, and unlock promoted placement without talking to a sales rep.
-                  </p>
-                  <Link
-                    href="/#for-shops"
-                    className="mt-4 inline-flex rounded-full bg-[color:var(--foreground)] px-5 py-3 text-sm font-semibold text-white"
-                  >
-                    See merchant model
-                  </Link>
-                </div>
-              ) : null}
             </aside>
           </div>
         </div>

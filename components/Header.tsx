@@ -3,8 +3,7 @@ import Link from "next/link";
 const navItems = [
   { href: "/search", label: "Search" },
   { href: "#how-it-works", label: "How it works" },
-  { href: "#popular-nearby", label: "Nearby shops" },
-  { href: "#for-shops", label: "For shops" }
+  { href: "#popular-nearby", label: "Nearby shops" }
 ];
 
 export function Header() {

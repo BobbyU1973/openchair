@@ -129,7 +129,6 @@ export default async function SearchPage({ searchParams }: SearchPageProps) {
               <p>These are real public-facing shop listings from the current North Carolina launch coverage area.</p>
               <p>Each result highlights booking access, phone, walk-ins, and specialties at a glance.</p>
               <p>Users can click through to the shop site or call directly to reserve a slot.</p>
-              <p>OpenChair monetizes this traffic through self-serve claims, sponsored listings, and promoted placement rather than outbound sales.</p>
               {isFallbackLocationResult ? (
                 <p>
                   No exact match for "{location}" in the current coverage area, so OpenChair is showing the nearest available Lake Norman-area options.

@@ -1,5 +1,3 @@
-import Link from "next/link";
-
 export function SiteFooter() {
   return (
     <footer className="border-t border-[color:var(--line)] bg-[rgba(255,252,248,0.86)]">
@@ -7,15 +5,12 @@ export function SiteFooter() {
         <div>
           <p className="text-lg font-semibold tracking-tight">OpenChair</p>
           <p className="mt-2 max-w-xl text-sm leading-6 text-[color:var(--muted)]">
-            Yelp/OpenTable for haircut availability, monetized through self-serve promotion and demand capture instead of cold-calling shops.
+            Find nearby haircut shops fast with direct call buttons, public booking links, and simple open-now signals.
           </p>
         </div>
         <div className="text-sm text-[color:var(--muted)]">
-          <p>Shops should be able to discover OpenChair, claim their page, connect a booking link, and pay without talking to anyone.</p>
+          <p>OpenChair is rolling out across North Carolina market by market, starting around Lake Norman.</p>
           <p className="mt-1">OpenChair &copy; 2026</p>
-          <Link href="/#for-shops" className="mt-3 inline-block font-semibold text-[color:var(--foreground)]">
-            For shops
-          </Link>
         </div>
       </div>
     </footer>
