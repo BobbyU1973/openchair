@@ -1,8 +1,20 @@
+import type { Metadata } from "next";
 import { Header } from "@/components/Header";
 import { SearchBar } from "@/components/SearchBar";
 import { SiteFooter } from "@/components/SiteFooter";
 import { ShopCard } from "@/components/ShopCard";
+import { TrackEvent } from "@/components/TrackEvent";
 import { regionalSearchTerms, shops } from "@/data/shops";
+
+export const metadata: Metadata = {
+  title: "Search Haircut Shops",
+  description:
+    "Search OpenChair for nearby haircut shops, walk-in options, and public booking links in the current North Carolina launch coverage area.",
+  robots: {
+    index: false,
+    follow: true
+  }
+};
 
 type SearchPageProps = {
   searchParams?: Promise<{
@@ -59,6 +71,31 @@ export default async function SearchPage({ searchParams }: SearchPageProps) {
 
   return (
     <main>
+      <TrackEvent
+        eventName="search_results_viewed"
+        params={{
+          query,
+          location,
+          results_count: filteredShops.length
+        }}
+      />
+      <TrackEvent
+        eventName="zip_search"
+        params={{
+          query,
+          location,
+          results_count: filteredShops.length
+        }}
+        enabled={isZipSearch}
+      />
+      <TrackEvent
+        eventName="zero_results_viewed"
+        params={{
+          query,
+          location
+        }}
+        enabled={filteredShops.length === 0}
+      />
       <Header />
 
       <section className="px-4 pb-8 pt-10 sm:px-6 lg:px-8">
@@ -89,13 +126,13 @@ export default async function SearchPage({ searchParams }: SearchPageProps) {
               Why OpenChair ranks these first
             </p>
             <div className="mt-5 space-y-4 text-sm leading-7 text-[color:var(--muted)]">
-              <p>These are real public-facing shop listings centered on the 28117 launch market.</p>
+              <p>These are real public-facing shop listings from the current North Carolina launch coverage area.</p>
               <p>Each result highlights booking access, phone, walk-ins, and specialties at a glance.</p>
               <p>Users can click through to the shop site or call directly to reserve a slot.</p>
               <p>OpenChair monetizes this traffic through self-serve claims, sponsored listings, and promoted placement rather than outbound sales.</p>
               {isFallbackLocationResult ? (
                 <p>
-                  No exact match for "{location}" in the current launch market, so OpenChair is showing the nearest available Mooresville-area options.
+                  No exact match for "{location}" in the current coverage area, so OpenChair is showing the nearest available Lake Norman-area options.
                 </p>
               ) : null}
             </div>
@@ -104,7 +141,7 @@ export default async function SearchPage({ searchParams }: SearchPageProps) {
           <div>
             <div className="mb-5 flex items-center justify-between gap-4">
               <p className="text-sm text-[color:var(--muted)]">
-                {filteredShops.length} real shops in the current launch area
+                {filteredShops.length} real shops in the current NC coverage set
               </p>
               <p className="rounded-full bg-white/80 px-4 py-2 text-sm font-medium">
                 Call or click to reserve

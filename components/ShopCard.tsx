@@ -1,5 +1,8 @@
+"use client";
+
 import Link from "next/link";
 import type { Shop } from "@/data/shops";
+import { trackEvent } from "@/lib/analytics";
 
 type ShopCardProps = {
   shop: Shop;
@@ -8,6 +11,19 @@ type ShopCardProps = {
 export function ShopCard({ shop }: ShopCardProps) {
   const primaryExternalUrl = shop.bookingUrl ?? shop.websiteUrl;
   const showWebsiteButton = shop.websiteUrl !== primaryExternalUrl;
+  const listingType = shop.sponsored ? "sponsored" : "organic";
+  const isChain =
+    shop.name.includes("Great Clips") ||
+    shop.name.includes("Sport Clips") ||
+    shop.name.includes("Supercuts");
+
+  const baseEventParams = {
+    shop_id: shop.id,
+    shop_name: shop.name,
+    location_zip: shop.zip,
+    listing_type: listingType,
+    is_chain: isChain
+  };
 
   return (
     <article className="rounded-[30px] border border-[color:var(--line)] bg-white/88 p-5 shadow-[var(--shadow)] transition hover:-translate-y-1 sm:p-6">
@@ -16,6 +32,12 @@ export function ShopCard({ shop }: ShopCardProps) {
             <div className="flex flex-wrap items-center gap-2">
               <Link
                 href={`/shops/${shop.id}`}
+                onClick={() =>
+                  trackEvent("shop_detail_clicked", {
+                    ...baseEventParams,
+                    source_surface: "results_name"
+                  })
+                }
                 className="text-xl font-semibold tracking-tight transition hover:text-[color:var(--accent-dark)]"
               >
                 {shop.name}
@@ -41,6 +63,12 @@ export function ShopCard({ shop }: ShopCardProps) {
             </p>
             <a
               href={shop.callUrl}
+              onClick={() =>
+                trackEvent("call_click", {
+                  ...baseEventParams,
+                  source_surface: "results_inline_phone"
+                })
+              }
               className="mt-2 inline-flex text-sm font-medium text-[color:var(--foreground)] underline decoration-[color:var(--line)] underline-offset-4"
             >
               {shop.phone}
@@ -77,6 +105,12 @@ export function ShopCard({ shop }: ShopCardProps) {
           <div className="flex flex-wrap gap-3">
             <a
               href={shop.callUrl}
+              onClick={() =>
+                trackEvent("call_click", {
+                  ...baseEventParams,
+                  source_surface: "results_call_button"
+                })
+              }
               className="inline-flex w-fit rounded-full border border-[color:var(--line)] bg-white px-4 py-3 text-sm font-semibold text-[color:var(--foreground)] transition hover:bg-[color:var(--panel-strong)]"
             >
               Call shop
@@ -85,6 +119,12 @@ export function ShopCard({ shop }: ShopCardProps) {
               href={primaryExternalUrl}
               target="_blank"
               rel="noreferrer"
+              onClick={() =>
+                trackEvent(shop.bookingUrl ? "booking_click" : "website_click", {
+                  ...baseEventParams,
+                  source_surface: "results_primary_link"
+                })
+              }
               className="inline-flex w-fit rounded-full bg-[color:var(--foreground)] px-4 py-3 text-sm font-semibold text-white transition hover:opacity-90"
             >
               {shop.bookingUrl ? shop.bookingLabel : "Visit website"}
@@ -94,6 +134,12 @@ export function ShopCard({ shop }: ShopCardProps) {
                 href={shop.websiteUrl}
                 target="_blank"
                 rel="noreferrer"
+                onClick={() =>
+                  trackEvent("website_click", {
+                    ...baseEventParams,
+                    source_surface: "results_secondary_website"
+                  })
+                }
                 className="inline-flex w-fit rounded-full border border-[color:var(--line)] bg-white px-4 py-3 text-sm font-semibold text-[color:var(--foreground)] transition hover:bg-[color:var(--panel-strong)]"
               >
                 Website
@@ -101,6 +147,12 @@ export function ShopCard({ shop }: ShopCardProps) {
             ) : null}
             <Link
               href={`/shops/${shop.id}`}
+              onClick={() =>
+                trackEvent("shop_detail_clicked", {
+                  ...baseEventParams,
+                  source_surface: "results_details_button"
+                })
+              }
               className="inline-flex w-fit rounded-full border border-[color:var(--line)] bg-white px-4 py-3 text-sm font-semibold text-[color:var(--foreground)] transition hover:bg-[color:var(--panel-strong)]"
             >
               Details

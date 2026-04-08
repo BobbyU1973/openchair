@@ -12,7 +12,7 @@ export function Hero() {
             Find nearby haircut availability fast.
           </h1>
           <p className="mt-5 max-w-xl text-lg leading-8 text-[color:var(--muted)]">
-            OpenChair helps people see real nearby haircut shops around Mooresville and Lake Norman, then click through or call the shop directly to reserve a spot.
+            OpenChair helps people across North Carolina start with real nearby haircut shops, beginning with the current Lake Norman coverage area, then click through or call the shop directly to reserve a spot.
           </p>
 
           <div className="mt-8">
@@ -22,7 +22,7 @@ export function Hero() {
           <div className="mt-6 flex flex-wrap gap-3 text-sm text-[color:var(--muted)]">
             <span className="rounded-full border border-[color:var(--line)] bg-white/80 px-4 py-2">Real local shop links</span>
             <span className="rounded-full border border-[color:var(--line)] bg-white/80 px-4 py-2">Call or click to reserve</span>
-            <span className="rounded-full border border-[color:var(--line)] bg-white/80 px-4 py-2">28117 and nearby communities</span>
+            <span className="rounded-full border border-[color:var(--line)] bg-white/80 px-4 py-2">North Carolina rollout underway</span>
           </div>
 
           <div className="mt-8 grid gap-4 sm:grid-cols-3">
@@ -32,7 +32,7 @@ export function Hero() {
             </div>
             <div className="rounded-[24px] border border-[color:var(--line)] bg-white/78 px-5 py-5">
               <p className="text-2xl font-semibold">28117</p>
-              <p className="mt-1 text-sm text-[color:var(--muted)]">Primary launch ZIP</p>
+              <p className="mt-1 text-sm text-[color:var(--muted)]">Current lead launch ZIP</p>
             </div>
             <div className="rounded-[24px] border border-[color:var(--line)] bg-white/78 px-5 py-5">
               <p className="text-2xl font-semibold">Call</p>
@@ -73,7 +73,7 @@ export function Hero() {
             <div className="mt-4 space-y-3 text-sm leading-7 text-[color:var(--muted)]">
               <p>Listings point to real public booking pages and shop phone numbers.</p>
               <p>OpenChair stays lightweight by helping users discover and contact shops fast.</p>
-              <p>ZIP and nearby-community searches route people to the same launch market around 28117.</p>
+              <p>OpenChair is rolling out North Carolina coverage market by market, starting around 28117.</p>
             </div>
           </div>
         </div>

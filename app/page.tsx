@@ -21,10 +21,10 @@ export default function HomePage() {
                 Popular nearby
               </p>
               <h2 className="mt-3 text-3xl font-semibold tracking-tight sm:text-4xl">
-                Real haircut shops around 28117 that people can contact right now
+                Real haircut shops in the current North Carolina launch coverage
               </h2>
               <p className="mt-3 max-w-2xl text-[color:var(--muted)]">
-                OpenChair now focuses on real local shop discovery with public booking pages and direct call links instead of fictional appointment slots.
+                OpenChair is starting around Lake Norman with real public booking pages and direct call links, then expanding coverage market by market across North Carolina.
               </p>
             </div>
             <Link
@@ -48,7 +48,7 @@ export default function HomePage() {
           {[
             {
               title: "Search by ZIP or city",
-              text: "Enter 28117 or a nearby community and OpenChair will surface the launch market around Lake Norman."
+              text: "Enter a North Carolina ZIP or city and OpenChair will surface the current coverage area while expansion continues market by market."
             },
             {
               title: "Compare real public info",

@@ -1,3 +1,7 @@
+"use client";
+
+import { trackEvent } from "@/lib/analytics";
+
 type SearchBarProps = {
   defaultLocation?: string;
   compact?: boolean;
@@ -7,9 +11,21 @@ export function SearchBar({
   defaultLocation = "Near me",
   compact = false
 }: SearchBarProps) {
+  const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
+    const formData = new FormData(event.currentTarget);
+    const location = String(formData.get("location") ?? "").trim();
+
+    trackEvent("search_submitted", {
+      query: "Haircut",
+      location,
+      search_mode: /^\d{5}$/.test(location) ? "zip" : "city_or_area"
+    });
+  };
+
   return (
     <form
       action="/search"
+      onSubmit={handleSubmit}
       className={[
         "grid gap-3 rounded-[30px] border border-[color:var(--line)] bg-white/92 p-3 shadow-[var(--shadow)] backdrop-blur",
         compact ? "md:grid-cols-[1fr_auto]" : "md:grid-cols-[1fr_auto]"

@@ -1,14 +1,55 @@
+import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { Header } from "@/components/Header";
 import { SiteFooter } from "@/components/SiteFooter";
+import { TrackedExternalLink } from "@/components/TrackedExternalLink";
+import { TrackEvent } from "@/components/TrackEvent";
 import { shops } from "@/data/shops";
+import { SITE_URL } from "@/lib/site";
 
 type ShopDetailPageProps = {
   params: Promise<{
     id: string;
   }>;
 };
+
+export async function generateMetadata({
+  params
+}: ShopDetailPageProps): Promise<Metadata> {
+  const { id } = await params;
+  const shop = shops.find((item) => item.id === id);
+
+  if (!shop) {
+    return {
+      title: "Shop not found"
+    };
+  }
+
+  const description = `${shop.name} in ${shop.city}, ${shop.state}. See phone, hours, walk-in status, and direct booking or website links on OpenChair.`;
+  const url = `${SITE_URL}/shops/${shop.id}`;
+
+  return {
+    title: shop.name,
+    description,
+    alternates: {
+      canonical: url
+    },
+    openGraph: {
+      title: `${shop.name} | OpenChair`,
+      description,
+      url,
+      siteName: "OpenChair",
+      type: "website"
+    }
+  };
+}
+
+export async function generateStaticParams() {
+  return shops.map((shop) => ({
+    id: shop.id
+  }));
+}
 
 export default async function ShopDetailPage({ params }: ShopDetailPageProps) {
   const { id } = await params;
@@ -18,8 +59,32 @@ export default async function ShopDetailPage({ params }: ShopDetailPageProps) {
     notFound();
   }
 
+  const listingType = shop.sponsored ? "sponsored" : "organic";
+  const isChain =
+    shop.name.includes("Great Clips") ||
+    shop.name.includes("Sport Clips") ||
+    shop.name.includes("Supercuts");
+  const baseEventParams = {
+    shop_id: shop.id,
+    shop_name: shop.name,
+    location_zip: shop.zip,
+    listing_type: listingType,
+    is_chain: isChain,
+    source_surface: "detail"
+  };
+  const showWebsiteButton = shop.websiteUrl !== shop.bookingUrl;
+
   return (
     <main>
+      <TrackEvent
+        eventName="shop_detail_viewed"
+        params={{
+          shop_id: shop.id,
+          shop_name: shop.name,
+          location_zip: shop.zip,
+          listing_type: shop.sponsored ? "sponsored" : "organic"
+        }}
+      />
       <Header />
 
       <section className="px-4 pb-16 pt-10 sm:px-6 lg:px-8">
@@ -127,22 +192,39 @@ export default async function ShopDetailPage({ params }: ShopDetailPageProps) {
               </p>
 
               {shop.bookingUrl ? (
-                <a
+                <TrackedExternalLink
                   href={shop.bookingUrl}
                   target="_blank"
                   rel="noreferrer"
+                  eventName="booking_click"
+                  eventParams={baseEventParams}
                   className="mt-8 flex w-full items-center justify-center rounded-[22px] bg-[color:var(--accent)] px-6 py-4 text-base font-semibold text-white shadow-[0_16px_34px_rgba(191,90,42,0.26)] transition hover:bg-[color:var(--accent-dark)]"
                 >
                   {shop.bookingLabel}
-                </a>
+                </TrackedExternalLink>
               ) : null}
 
-              <a
+              <TrackedExternalLink
                 href={shop.callUrl}
+                eventName="call_click"
+                eventParams={baseEventParams}
                 className="mt-4 flex w-full items-center justify-center rounded-[22px] border border-[color:var(--line)] bg-white px-6 py-4 text-base font-semibold text-[color:var(--foreground)] transition hover:bg-[color:var(--panel-strong)]"
               >
                 Call {shop.phone}
-              </a>
+              </TrackedExternalLink>
+
+              {showWebsiteButton ? (
+                <TrackedExternalLink
+                  href={shop.websiteUrl}
+                  target="_blank"
+                  rel="noreferrer"
+                  eventName="website_click"
+                  eventParams={baseEventParams}
+                  className="mt-4 flex w-full items-center justify-center rounded-[22px] border border-[color:var(--line)] bg-white px-6 py-4 text-base font-semibold text-[color:var(--foreground)] transition hover:bg-[color:var(--panel-strong)]"
+                >
+                  Visit website
+                </TrackedExternalLink>
+              ) : null}
 
               <div className="mt-6 space-y-4 rounded-[28px] bg-white px-5 py-5">
                 <div className="flex items-center justify-between gap-4 text-sm">
@@ -163,7 +245,17 @@ export default async function ShopDetailPage({ params }: ShopDetailPageProps) {
                 </div>
                 <div className="flex items-center justify-between gap-4 text-sm">
                   <span className="text-[color:var(--muted)]">Phone</span>
-                  <span className="font-semibold">{shop.phone}</span>
+                  <TrackedExternalLink
+                    href={shop.callUrl}
+                    eventName="call_click"
+                    eventParams={{
+                      ...baseEventParams,
+                      source_surface: "detail_phone_row"
+                    }}
+                    className="font-semibold"
+                  >
+                    {shop.phone}
+                  </TrackedExternalLink>
                 </div>
               </div>
 
