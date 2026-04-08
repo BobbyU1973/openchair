@@ -11,6 +11,9 @@ export const metadata: Metadata = {
     default: "OpenChair | Find Nearby Haircut Availability Fast",
     template: "%s | OpenChair"
   },
+  verification: {
+    google: "Vw9myqX8OlyKcfU"
+  },
   description:
     "Find nearby haircut shops fast with open-now signals, walk-in options, click-to-call phone numbers, and direct booking links on OpenChair.",
   applicationName: "OpenChair",
