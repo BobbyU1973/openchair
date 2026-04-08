@@ -49,6 +49,63 @@ export const regionalSearchTerms = [
 
 export const shops: Shop[] = [
   {
+    id: "sport-clips-mooresville",
+    name: "Sport Clips Haircuts of Mooresville",
+    neighborhood: "River Highway",
+    address: "598 B. River Hwy, Suite B",
+    city: "Mooresville",
+    state: "NC",
+    zip: "28117",
+    distance: "28117 area",
+    availabilitySummary: "Walk-ins welcome and online check-in available",
+    priceFrom: null,
+    rating: null,
+    reviewCount: null,
+    specialties: ["Men's haircuts", "Boys cuts", "Walk-ins"],
+    openNow: true,
+    walkInsAvailable: true,
+    hoursSummary: [
+      "Monday - Friday: 9:00 AM - 7:00 PM",
+      "Saturday: 8:00 AM - 6:00 PM",
+      "Sunday: 9:00 AM - 4:00 PM"
+    ],
+    phone: "(704) 658-0441",
+    callUrl: "tel:+17046580441",
+    bookingUrl: "https://sportclips.com/us-nc-mooresville-nc107",
+    websiteUrl: "https://sportclips.com/us-nc-mooresville-nc107",
+    bookingLabel: "Check in online",
+    claimed: false,
+    sponsored: false
+  },
+  {
+    id: "great-clips-mooresville-gateway",
+    name: "Great Clips Mooresville Gateway",
+    neighborhood: "Mooresville Gateway",
+    address: "125 Trade Ct, Ste. C",
+    city: "Mooresville",
+    state: "NC",
+    zip: "28117",
+    distance: "28117 area",
+    availabilitySummary: "Online Check-In currently unavailable; walk-ins welcome",
+    priceFrom: 20,
+    rating: null,
+    reviewCount: null,
+    specialties: ["Men's haircuts", "Kids cuts", "Beard trim"],
+    openNow: true,
+    walkInsAvailable: true,
+    hoursSummary: [
+      "Use the Great Clips page or call ahead for today's posted hours.",
+      "Public page confirms walk-ins are welcome at this location."
+    ],
+    phone: "(704) 664-7724",
+    callUrl: "tel:+17046647724",
+    bookingUrl: "https://salons.greatclips.com/us/nc/mooresville/125-trade-ct/salon-services",
+    websiteUrl: "https://salons.greatclips.com/us/nc/mooresville/125-trade-ct/salon-services",
+    bookingLabel: "Visit Great Clips page",
+    claimed: false,
+    sponsored: false
+  },
+  {
     id: "diesel-barbershop-mooresville",
     name: "Diesel Barbershop Mooresville Town Square",
     neighborhood: "Town Square",

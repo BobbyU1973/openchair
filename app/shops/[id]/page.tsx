@@ -123,10 +123,7 @@ export default async function ShopDetailPage({ params }: ShopDetailPageProps) {
               </p>
               <p className="mt-4 text-3xl font-semibold tracking-tight">{shop.availabilitySummary}</p>
               <p className="mt-3 text-[color:var(--muted)]">
-                {shop.priceFrom
-                  ? `Haircuts start around $${shop.priceFrom}.`
-                  : "Pricing is listed on the shop site or available by phone."}{" "}
-                OpenChair sends people straight to the shop to reserve.
+                OpenChair sends people straight to the shop to reserve through the public booking link or by phone.
               </p>
 
               {shop.bookingUrl ? (

@@ -6,16 +6,20 @@ type ShopCardProps = {
 };
 
 export function ShopCard({ shop }: ShopCardProps) {
+  const primaryExternalUrl = shop.bookingUrl ?? shop.websiteUrl;
+  const showWebsiteButton = shop.websiteUrl !== primaryExternalUrl;
+
   return (
-    <Link
-      href={`/shops/${shop.id}`}
-      className="block rounded-[30px] border border-[color:var(--line)] bg-white/88 p-5 shadow-[var(--shadow)] transition hover:-translate-y-1 sm:p-6"
-    >
-      <article>
+    <article className="rounded-[30px] border border-[color:var(--line)] bg-white/88 p-5 shadow-[var(--shadow)] transition hover:-translate-y-1 sm:p-6">
         <div className="flex items-start justify-between gap-4">
           <div>
             <div className="flex flex-wrap items-center gap-2">
-              <h3 className="text-xl font-semibold tracking-tight">{shop.name}</h3>
+              <Link
+                href={`/shops/${shop.id}`}
+                className="text-xl font-semibold tracking-tight transition hover:text-[color:var(--accent-dark)]"
+              >
+                {shop.name}
+              </Link>
               {shop.sponsored ? (
                 <span className="rounded-full bg-[color:var(--accent-soft)] px-3 py-1 text-xs font-semibold text-[color:var(--accent-dark)]">
                   Sponsored
@@ -35,15 +39,12 @@ export function ShopCard({ shop }: ShopCardProps) {
             <p className="mt-2 text-sm text-[color:var(--muted)]">
               {shop.city}, {shop.state} {shop.zip} | {shop.neighborhood}
             </p>
-          </div>
-
-          <div className="rounded-[22px] bg-[color:var(--accent-soft)] px-4 py-3 text-right">
-            <p className="text-xs font-semibold uppercase tracking-[0.2em] text-[color:var(--muted)]">
-              {shop.priceFrom ? "From" : "Contact"}
-            </p>
-            <p className="text-xl font-semibold">
-              {shop.priceFrom ? `$${shop.priceFrom}` : "Call"}
-            </p>
+            <a
+              href={shop.callUrl}
+              className="mt-2 inline-flex text-sm font-medium text-[color:var(--foreground)] underline decoration-[color:var(--line)] underline-offset-4"
+            >
+              {shop.phone}
+            </a>
           </div>
         </div>
 
@@ -73,11 +74,39 @@ export function ShopCard({ shop }: ShopCardProps) {
           <p className="text-sm text-[color:var(--success)]">
             {shop.claimed ? "Claimed profile" : "Unclaimed profile"}
           </p>
-          <span className="inline-flex w-fit rounded-full bg-[color:var(--foreground)] px-5 py-3 text-sm font-semibold text-white transition hover:opacity-90">
-            View booking options
-          </span>
+          <div className="flex flex-wrap gap-3">
+            <a
+              href={shop.callUrl}
+              className="inline-flex w-fit rounded-full border border-[color:var(--line)] bg-white px-4 py-3 text-sm font-semibold text-[color:var(--foreground)] transition hover:bg-[color:var(--panel-strong)]"
+            >
+              Call shop
+            </a>
+            <a
+              href={primaryExternalUrl}
+              target="_blank"
+              rel="noreferrer"
+              className="inline-flex w-fit rounded-full bg-[color:var(--foreground)] px-4 py-3 text-sm font-semibold text-white transition hover:opacity-90"
+            >
+              {shop.bookingUrl ? shop.bookingLabel : "Visit website"}
+            </a>
+            {showWebsiteButton ? (
+              <a
+                href={shop.websiteUrl}
+                target="_blank"
+                rel="noreferrer"
+                className="inline-flex w-fit rounded-full border border-[color:var(--line)] bg-white px-4 py-3 text-sm font-semibold text-[color:var(--foreground)] transition hover:bg-[color:var(--panel-strong)]"
+              >
+                Website
+              </a>
+            ) : null}
+            <Link
+              href={`/shops/${shop.id}`}
+              className="inline-flex w-fit rounded-full border border-[color:var(--line)] bg-white px-4 py-3 text-sm font-semibold text-[color:var(--foreground)] transition hover:bg-[color:var(--panel-strong)]"
+            >
+              Details
+            </Link>
+          </div>
         </div>
       </article>
-    </Link>
   );
 }

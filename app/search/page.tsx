@@ -90,7 +90,7 @@ export default async function SearchPage({ searchParams }: SearchPageProps) {
             </p>
             <div className="mt-5 space-y-4 text-sm leading-7 text-[color:var(--muted)]">
               <p>These are real public-facing shop listings centered on the 28117 launch market.</p>
-              <p>Each result highlights booking access, phone, walk-ins, pricing, and specialties at a glance.</p>
+              <p>Each result highlights booking access, phone, walk-ins, and specialties at a glance.</p>
               <p>Users can click through to the shop site or call directly to reserve a slot.</p>
               <p>OpenChair monetizes this traffic through self-serve claims, sponsored listings, and promoted placement rather than outbound sales.</p>
               {isFallbackLocationResult ? (

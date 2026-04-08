@@ -52,7 +52,7 @@ export default function HomePage() {
             },
             {
               title: "Compare real public info",
-              text: "See address, phone, booking access, walk-in status, and publicly listed pricing where available."
+              text: "See address, phone, booking access, walk-in status, and public availability signals quickly."
             },
             {
               title: "Reserve on the shop's terms",
