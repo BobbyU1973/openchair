@@ -1,5 +1,4 @@
 import type { Metadata } from "next";
-import { notFound } from "next/navigation";
 import { Header } from "@/components/Header";
 import { SiteFooter } from "@/components/SiteFooter";
 import { outboundActionLabels } from "@/lib/outboundActions";
@@ -17,6 +16,7 @@ export const metadata: Metadata = {
 
 type OutboundClicksPageProps = {
   searchParams?: Promise<{
+    adminKey?: string;
     key?: string;
   }>;
 };
@@ -29,10 +29,37 @@ export default async function OutboundClicksPage({
   searchParams
 }: OutboundClicksPageProps) {
   const params = (await searchParams) ?? {};
-  const adminKey = process.env.OPENCHAIR_ADMIN_KEY;
+  const adminKey = process.env.OPENCHAIR_ADMIN_KEY?.trim();
+  const suppliedKey = (params.key ?? params.adminKey ?? "").trim();
 
-  if (!adminKey || params.key !== adminKey) {
-    notFound();
+  if (!adminKey || suppliedKey !== adminKey) {
+    return (
+      <main>
+        <Header />
+
+        <section className="px-4 py-10 sm:px-6 lg:px-8">
+          <div className="mx-auto max-w-3xl rounded-[28px] border border-[color:var(--line)] bg-white p-6 shadow-[var(--shadow)]">
+            <p className="text-sm font-semibold uppercase tracking-[0.24em] text-[color:var(--muted)]">
+              Internal report
+            </p>
+            <h1 className="mt-3 text-3xl font-semibold tracking-tight">
+              Admin report locked
+            </h1>
+            <p className="mt-4 leading-7 text-[color:var(--muted)]">
+              The outbound click report is protected. Metrics are not shown unless the
+              Vercel environment variable is configured and the URL key matches.
+            </p>
+            <div className="mt-6 rounded-[22px] bg-[color:var(--panel-strong)] p-5 text-sm leading-7 text-[color:var(--muted)]">
+              <p>Admin key configured in this deployment: {adminKey ? "Yes" : "No"}</p>
+              <p>URL key supplied: {suppliedKey ? "Yes" : "No"}</p>
+              <p>Key match: No</p>
+            </div>
+          </div>
+        </section>
+
+        <SiteFooter />
+      </main>
+    );
   }
 
   const stats = await getOutboundClickStats();
