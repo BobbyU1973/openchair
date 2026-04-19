@@ -143,13 +143,6 @@ export default async function SearchPage({ searchParams }: SearchPageProps) {
     return `/search?${nextParams.toString()}`;
   };
 
-  const isFallbackLocationResult =
-    normalizedLocation.length > 0 &&
-    normalizedLocation !== "near me" &&
-    !isRegionalSearch &&
-    locationMatchedShops.length === 0 &&
-    queryMatchedShops.length > 0;
-
   return (
     <main>
       <TrackEvent
@@ -204,12 +197,11 @@ export default async function SearchPage({ searchParams }: SearchPageProps) {
       </section>
 
       <section className="px-4 pb-20 sm:px-6 lg:px-8">
-        <div className="mx-auto grid max-w-7xl gap-8 xl:grid-cols-[minmax(0,1fr)_320px]">
-          <div className="order-1">
+        <div className="mx-auto max-w-7xl">
             <div className="mb-5 rounded-[28px] border border-[color:var(--line)] bg-white/82 p-4 shadow-[0_14px_38px_rgba(44,30,18,0.05)] sm:p-5">
               <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
                 <p className="text-sm text-[color:var(--muted)]">
-                  {resultShops.length} of {filteredShops.length} real shops in the current NC coverage set
+                  {resultShops.length} of {filteredShops.length} nearby shops
                 </p>
                 <p className="inline-flex w-fit rounded-full bg-[color:var(--panel-strong)] px-4 py-2 text-sm font-medium">
                   Tap to call, book, or get directions
@@ -253,23 +245,6 @@ export default async function SearchPage({ searchParams }: SearchPageProps) {
                 ))}
               </div>
             )}
-          </div>
-
-          <aside className="order-2 h-fit rounded-[32px] border border-[color:var(--line)] bg-white/82 p-6 shadow-[var(--shadow)] xl:sticky xl:top-24">
-            <p className="text-sm font-semibold uppercase tracking-[0.22em] text-[color:var(--muted)]">
-              Why these show up first
-            </p>
-            <div className="mt-5 space-y-4 text-sm leading-7 text-[color:var(--muted)]">
-              <p>These are real public-facing shop listings from the current North Carolina launch coverage area.</p>
-              <p>Each result highlights booking access, phone, walk-ins, and specialties at a glance.</p>
-              <p>Users can click through to the shop site or call directly to reserve a slot.</p>
-              {isFallbackLocationResult ? (
-                <p>
-                  No exact match for "{location}" in the current coverage area, so ChairRadar is showing the nearest available Lake Norman-area options.
-                </p>
-              ) : null}
-            </div>
-          </aside>
         </div>
       </section>
 
