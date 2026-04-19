@@ -8,6 +8,10 @@ import { TrackEvent } from "@/components/TrackEvent";
 import { shops } from "@/data/shops";
 import { getOutboundHref } from "@/lib/outboundActions";
 import { SITE_URL } from "@/lib/site";
+import {
+  getBreadcrumbStructuredData,
+  getShopStructuredData
+} from "@/lib/structuredData";
 
 type ShopDetailPageProps = {
   params: Promise<{
@@ -81,9 +85,21 @@ export default async function ShopDetailPage({ params }: ShopDetailPageProps) {
   const websiteHref = getOutboundHref(shop.id, "visit_website", "detail_website_button");
   const directionsHref = getOutboundHref(shop.id, "get_directions", "detail_directions_button");
   const phoneRowHref = getOutboundHref(shop.id, "call_shop", "detail_phone_row");
+  const structuredData = [
+    getShopStructuredData(shop),
+    getBreadcrumbStructuredData([
+      { name: "ChairRadar", url: SITE_URL },
+      { name: "Haircut shops", url: `${SITE_URL}/nc/lake-norman/haircuts` },
+      { name: shop.name, url: `${SITE_URL}/shops/${shop.id}` }
+    ])
+  ];
 
   return (
     <main>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData) }}
+      />
       <TrackEvent
         eventName="shop_detail_viewed"
         params={{

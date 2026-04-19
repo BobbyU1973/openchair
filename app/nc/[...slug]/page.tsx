@@ -13,6 +13,7 @@ import {
   locationPages
 } from "@/data/locationPages";
 import { SITE_URL } from "@/lib/site";
+import { getLocationPageStructuredData } from "@/lib/structuredData";
 
 type LocationLandingPageProps = {
   params: Promise<{
@@ -69,9 +70,14 @@ export default async function LocationLandingPage({
   const pageShops = getLocationPageShops(page);
   const relatedPages = getRelatedLocationPages(page);
   const summary = getShopLocationSummary(pageShops);
+  const structuredData = getLocationPageStructuredData(page, pageShops);
 
   return (
     <main>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData) }}
+      />
       <Header />
 
       <section className="px-4 pb-10 pt-10 sm:px-6 lg:px-8 lg:pb-14">
@@ -85,6 +91,9 @@ export default async function LocationLandingPage({
             </h1>
             <p className="mt-5 max-w-3xl text-lg leading-8 text-[color:var(--muted)]">
               {page.description}
+            </p>
+            <p className="mt-4 inline-flex rounded-full border border-[color:var(--line)] bg-white/80 px-4 py-2 text-sm font-semibold text-[color:var(--muted)]">
+              {page.lastUpdatedLabel}
             </p>
             <div className="mt-8 max-w-3xl">
               <SearchBar defaultLocation={page.searchLocation} />
@@ -100,6 +109,10 @@ export default async function LocationLandingPage({
             </p>
             <p className="mt-3 text-sm leading-7 text-[color:var(--muted)]">
               {page.intro}
+            </p>
+            <p className="mt-4 text-sm leading-7 text-[color:var(--muted)]">
+              Coverage includes {summary.cities.join(", ")}. Listings use public shop pages,
+              phone numbers, and booking links where available.
             </p>
             <div className="mt-5 flex flex-wrap gap-2">
               {summary.zips.map((zip) => (
@@ -144,6 +157,33 @@ export default async function LocationLandingPage({
               />
             ))}
           </div>
+        </div>
+      </section>
+
+      <section className="px-4 pb-14 sm:px-6 lg:px-8">
+        <div className="mx-auto grid max-w-7xl gap-6 lg:grid-cols-3">
+          {[
+            {
+              title: "How ChairRadar chooses listings",
+              text: "This page focuses on public-facing haircut shops in the current launch coverage area, including shops with phone, website, directions, or booking access."
+            },
+            {
+              title: "What to check before you go",
+              text: "Hours, walk-in status, and online check-in can change during the day. Use the call, booking, website, or directions buttons to confirm before driving."
+            },
+            {
+              title: "Why this page exists",
+              text: "Most users just need a fast path to a haircut. ChairRadar keeps the experience lightweight by helping people compare nearby options and contact shops directly."
+            }
+          ].map((item) => (
+            <div
+              key={item.title}
+              className="rounded-[30px] border border-[color:var(--line)] bg-white/78 p-6 shadow-[var(--shadow)]"
+            >
+              <h2 className="text-2xl font-semibold tracking-tight">{item.title}</h2>
+              <p className="mt-3 leading-7 text-[color:var(--muted)]">{item.text}</p>
+            </div>
+          ))}
         </div>
       </section>
 
