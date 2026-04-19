@@ -38,7 +38,8 @@ function isChainShop(shop: Shop) {
     shop.name.includes("Great Clips") ||
     shop.name.includes("Sport Clips") ||
     shop.name.includes("Supercuts") ||
-    shop.name.includes("Ulta")
+    shop.name.includes("Ulta") ||
+    shop.name.includes("Fantastic Sams")
   );
 }
 

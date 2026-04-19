@@ -64,7 +64,9 @@ export default async function ShopDetailPage({ params }: ShopDetailPageProps) {
   const isChain =
     shop.name.includes("Great Clips") ||
     shop.name.includes("Sport Clips") ||
-    shop.name.includes("Supercuts");
+    shop.name.includes("Supercuts") ||
+    shop.name.includes("Ulta") ||
+    shop.name.includes("Fantastic Sams");
   const baseEventParams = {
     shop_id: shop.id,
     shop_name: shop.name,
