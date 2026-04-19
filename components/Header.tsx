@@ -12,10 +12,10 @@ export function Header() {
       <div className="mx-auto flex w-full max-w-7xl items-center justify-between px-4 py-4 sm:px-6 lg:px-8">
         <Link href="/" className="flex items-center gap-3">
           <span className="flex h-11 w-11 items-center justify-center rounded-2xl bg-[color:var(--foreground)] text-sm font-semibold text-white shadow-[0_10px_30px_rgba(31,23,17,0.18)]">
-            OC
+            CR
           </span>
           <div>
-            <p className="text-lg font-semibold tracking-tight">OpenChair</p>
+            <p className="text-lg font-semibold tracking-tight">ChairRadar</p>
             <p className="hidden text-sm text-[color:var(--muted)] sm:block">
               Find haircut availability fast
             </p>

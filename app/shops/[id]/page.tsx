@@ -27,7 +27,7 @@ export async function generateMetadata({
     };
   }
 
-  const description = `${shop.name} in ${shop.city}, ${shop.state}. See phone, hours, walk-in status, and direct booking or website links on OpenChair.`;
+  const description = `${shop.name} in ${shop.city}, ${shop.state}. See phone, hours, walk-in status, and direct booking or website links on ChairRadar.`;
   const url = `${SITE_URL}/shops/${shop.id}`;
 
   return {
@@ -37,10 +37,10 @@ export async function generateMetadata({
       canonical: url
     },
     openGraph: {
-      title: `${shop.name} | OpenChair`,
+      title: `${shop.name} | ChairRadar`,
       description,
       url,
-      siteName: "OpenChair",
+      siteName: "ChairRadar",
       type: "website"
     }
   };
@@ -105,7 +105,7 @@ export default async function ShopDetailPage({ params }: ShopDetailPageProps) {
           <div className="mt-6 grid gap-8 lg:grid-cols-[0.62fr_0.38fr]">
             <div className="rounded-[34px] border border-[color:var(--line)] bg-white/88 p-6 shadow-[var(--shadow)] sm:p-8">
               <p className="text-sm font-semibold uppercase tracking-[0.24em] text-[color:var(--muted)]">
-                OpenChair shop profile
+                ChairRadar shop profile
               </p>
               <div className="mt-4 flex flex-wrap items-center gap-3">
                 <h1 className="text-4xl font-semibold tracking-tight sm:text-5xl">{shop.name}</h1>
@@ -184,7 +184,7 @@ export default async function ShopDetailPage({ params }: ShopDetailPageProps) {
               </p>
               <p className="mt-4 text-3xl font-semibold tracking-tight">{shop.availabilitySummary}</p>
               <p className="mt-3 text-[color:var(--muted)]">
-                OpenChair sends people straight to the shop to reserve through the public booking link or by phone.
+                ChairRadar sends people straight to the shop to reserve through the public booking link or by phone.
               </p>
 
               {shop.bookingUrl ? (
@@ -274,7 +274,7 @@ export default async function ShopDetailPage({ params }: ShopDetailPageProps) {
                   Claim your listing
                 </h3>
                 <p className="mt-3 text-sm leading-7 text-[color:var(--muted)]">
-                  Track clicks to your listing and improve booking links when OpenChair self-serve tools launch.
+                  Track clicks to your listing and improve booking links when ChairRadar self-serve tools launch.
                 </p>
               </div>
             </aside>

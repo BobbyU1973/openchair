@@ -3,6 +3,7 @@ import { Header } from "@/components/Header";
 import { Hero } from "@/components/Hero";
 import { SiteFooter } from "@/components/SiteFooter";
 import { ShopCard } from "@/components/ShopCard";
+import { locationPages } from "@/data/locationPages";
 import { shops } from "@/data/shops";
 
 export default function HomePage() {
@@ -24,7 +25,7 @@ export default function HomePage() {
                 Real haircut shops in the current North Carolina launch coverage
               </h2>
               <p className="mt-3 max-w-2xl text-[color:var(--muted)]">
-                OpenChair is starting around Lake Norman with real public booking pages and direct call links, then expanding coverage market by market across North Carolina.
+                ChairRadar is starting around Lake Norman with real public booking pages and direct call links, then expanding coverage market by market across North Carolina.
               </p>
             </div>
             <Link
@@ -37,7 +38,43 @@ export default function HomePage() {
 
           <div className="mt-8 grid gap-6 lg:grid-cols-3">
             {featuredShops.map((shop) => (
-              <ShopCard key={shop.id} shop={shop} />
+              <ShopCard key={shop.id} shop={shop} sourcePage="homepage_featured" />
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <section className="px-4 pb-14 sm:px-6 lg:px-8">
+        <div className="mx-auto max-w-7xl rounded-[36px] border border-[color:var(--line)] bg-white/78 p-6 shadow-[var(--shadow)] lg:p-10">
+          <div className="max-w-3xl">
+            <p className="text-sm font-semibold uppercase tracking-[0.24em] text-[color:var(--muted)]">
+              Local haircut pages
+            </p>
+            <h2 className="mt-3 text-3xl font-semibold tracking-tight sm:text-4xl">
+              Browse Lake Norman and Mooresville haircut options
+            </h2>
+            <p className="mt-3 text-[color:var(--muted)]">
+              These focused pages help people find nearby haircut shops by location and intent, while giving Google useful pages to crawl.
+            </p>
+          </div>
+
+          <div className="mt-8 grid gap-4 md:grid-cols-2 lg:grid-cols-3">
+            {locationPages.map((page) => (
+              <Link
+                key={page.id}
+                href={page.href}
+                className="rounded-[28px] border border-[color:var(--line)] bg-[color:var(--panel-strong)] p-5 transition hover:-translate-y-1"
+              >
+                <p className="text-sm font-semibold uppercase tracking-[0.2em] text-[color:var(--muted)]">
+                  {page.areaName}
+                </p>
+                <h3 className="mt-3 text-xl font-semibold tracking-tight">
+                  {page.heading}
+                </h3>
+                <p className="mt-3 text-sm leading-6 text-[color:var(--muted)]">
+                  {page.metaDescription}
+                </p>
+              </Link>
             ))}
           </div>
         </div>
@@ -48,7 +85,7 @@ export default function HomePage() {
           {[
             {
               title: "Search by ZIP or city",
-              text: "Enter a North Carolina ZIP or city and OpenChair will surface the current coverage area while expansion continues market by market."
+              text: "Enter a North Carolina ZIP or city and ChairRadar will surface the current coverage area while expansion continues market by market."
             },
             {
               title: "Compare real public info",
@@ -56,12 +93,12 @@ export default function HomePage() {
             },
             {
               title: "Reserve on the shop's terms",
-              text: "OpenChair helps people click through or call the shop directly without adding a heavy booking system yet."
+              text: "ChairRadar helps people click through or call the shop directly without adding a heavy booking system yet."
             }
           ].map((item) => (
             <div key={item.title} className="rounded-[28px] bg-[color:var(--panel-strong)] p-6">
               <p className="text-sm font-semibold uppercase tracking-[0.2em] text-[color:var(--muted)]">
-                OpenChair
+                ChairRadar
               </p>
               <h3 className="mt-4 text-2xl font-semibold tracking-tight">{item.title}</h3>
               <p className="mt-3 leading-7 text-[color:var(--muted)]">{item.text}</p>

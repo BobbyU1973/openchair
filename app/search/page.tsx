@@ -9,7 +9,7 @@ import { regionalSearchTerms, shops } from "@/data/shops";
 export const metadata: Metadata = {
   title: "Search Haircut Shops",
   description:
-    "Search OpenChair for nearby haircut shops, walk-in options, and public booking links in the current North Carolina launch coverage area.",
+    "Search ChairRadar for nearby haircut shops, walk-in options, and public booking links in the current North Carolina launch coverage area.",
   robots: {
     index: false,
     follow: true
@@ -135,13 +135,13 @@ export default async function SearchPage({ searchParams }: SearchPageProps) {
               <div className="rounded-[32px] border border-dashed border-[color:var(--line)] bg-white/70 px-6 py-12 text-center">
                 <p className="text-xl font-semibold">No exact matches yet</p>
                 <p className="mt-3 text-[color:var(--muted)]">
-                  Try a broader search like "haircut" or use "Near me" to see all nearby OpenChair results.
+                  Try a broader search like "haircut" or use "Near me" to see all nearby ChairRadar results.
                 </p>
               </div>
             ) : (
               <div className="grid gap-6">
                 {filteredShops.map((shop) => (
-                  <ShopCard key={shop.id} shop={shop} />
+                  <ShopCard key={shop.id} shop={shop} sourcePage="search_results" />
                 ))}
               </div>
             )}
@@ -157,7 +157,7 @@ export default async function SearchPage({ searchParams }: SearchPageProps) {
               <p>Users can click through to the shop site or call directly to reserve a slot.</p>
               {isFallbackLocationResult ? (
                 <p>
-                  No exact match for "{location}" in the current coverage area, so OpenChair is showing the nearest available Lake Norman-area options.
+                  No exact match for "{location}" in the current coverage area, so ChairRadar is showing the nearest available Lake Norman-area options.
                 </p>
               ) : null}
             </div>

@@ -7,17 +7,18 @@ import { getOutboundHref } from "@/lib/outboundActions";
 
 type ShopCardProps = {
   shop: Shop;
+  sourcePage?: string;
 };
 
-export function ShopCard({ shop }: ShopCardProps) {
+export function ShopCard({ shop, sourcePage = "results" }: ShopCardProps) {
   const primaryExternalUrl = shop.bookingUrl ?? shop.websiteUrl;
   const showWebsiteButton = shop.websiteUrl !== primaryExternalUrl;
   const primaryAction = shop.bookingUrl ? "book_on_website" : "visit_website";
-  const primaryHref = getOutboundHref(shop.id, primaryAction, "results_primary_link");
-  const callHref = getOutboundHref(shop.id, "call_shop", "results_call_button");
-  const inlineCallHref = getOutboundHref(shop.id, "call_shop", "results_inline_phone");
-  const websiteHref = getOutboundHref(shop.id, "visit_website", "results_secondary_website");
-  const directionsHref = getOutboundHref(shop.id, "get_directions", "results_directions");
+  const primaryHref = getOutboundHref(shop.id, primaryAction, `${sourcePage}_primary_link`);
+  const callHref = getOutboundHref(shop.id, "call_shop", `${sourcePage}_call_button`);
+  const inlineCallHref = getOutboundHref(shop.id, "call_shop", `${sourcePage}_inline_phone`);
+  const websiteHref = getOutboundHref(shop.id, "visit_website", `${sourcePage}_secondary_website`);
+  const directionsHref = getOutboundHref(shop.id, "get_directions", `${sourcePage}_directions`);
   const listingType = shop.sponsored ? "sponsored" : "organic";
   const isChain =
     shop.name.includes("Great Clips") ||
@@ -42,7 +43,7 @@ export function ShopCard({ shop }: ShopCardProps) {
                 onClick={() =>
                   trackEvent("shop_detail_clicked", {
                     ...baseEventParams,
-                    source_surface: "results_name"
+                    source_surface: `${sourcePage}_name`
                   })
                 }
                 className="text-xl font-semibold tracking-tight transition hover:text-[color:var(--accent-dark)]"
@@ -68,7 +69,7 @@ export function ShopCard({ shop }: ShopCardProps) {
               onClick={() =>
                 trackEvent("call_click", {
                   ...baseEventParams,
-                  source_surface: "results_inline_phone"
+                  source_surface: `${sourcePage}_inline_phone`
                 })
               }
               className="mt-2 inline-flex text-sm font-medium text-[color:var(--foreground)] underline decoration-[color:var(--line)] underline-offset-4"
@@ -107,7 +108,7 @@ export function ShopCard({ shop }: ShopCardProps) {
               onClick={() =>
                 trackEvent("call_click", {
                   ...baseEventParams,
-                  source_surface: "results_call_button"
+                  source_surface: `${sourcePage}_call_button`
                 })
               }
               className="inline-flex w-full items-center justify-center rounded-full bg-[color:var(--accent)] px-4 py-3 text-sm font-semibold text-white shadow-[0_14px_34px_rgba(191,90,42,0.18)] transition hover:bg-[color:var(--accent-dark)] sm:w-fit"
@@ -121,7 +122,7 @@ export function ShopCard({ shop }: ShopCardProps) {
               onClick={() =>
                 trackEvent(shop.bookingUrl ? "booking_click" : "website_click", {
                   ...baseEventParams,
-                  source_surface: "results_primary_link"
+                  source_surface: `${sourcePage}_primary_link`
                 })
               }
               className="inline-flex w-full items-center justify-center rounded-full border border-[color:var(--line)] bg-white px-4 py-3 text-sm font-semibold text-[color:var(--foreground)] transition hover:bg-[color:var(--panel-strong)] sm:w-fit"
@@ -135,7 +136,7 @@ export function ShopCard({ shop }: ShopCardProps) {
               onClick={() =>
                 trackEvent("directions_click", {
                   ...baseEventParams,
-                  source_surface: "results_directions"
+                  source_surface: `${sourcePage}_directions`
                 })
               }
               className="inline-flex w-full items-center justify-center rounded-full border border-[color:var(--line)] bg-white px-4 py-3 text-sm font-semibold text-[color:var(--foreground)] transition hover:bg-[color:var(--panel-strong)] sm:w-fit"
@@ -150,7 +151,7 @@ export function ShopCard({ shop }: ShopCardProps) {
                 onClick={() =>
                   trackEvent("website_click", {
                     ...baseEventParams,
-                    source_surface: "results_secondary_website"
+                    source_surface: `${sourcePage}_secondary_website`
                   })
                 }
                 className="inline-flex w-full items-center justify-center rounded-full border border-[color:var(--line)] bg-white px-4 py-3 text-sm font-semibold text-[color:var(--foreground)] transition hover:bg-[color:var(--panel-strong)] sm:w-fit"
@@ -163,7 +164,7 @@ export function ShopCard({ shop }: ShopCardProps) {
               onClick={() =>
                 trackEvent("shop_detail_clicked", {
                   ...baseEventParams,
-                  source_surface: "results_details_button"
+                  source_surface: `${sourcePage}_details_button`
                 })
               }
               className="inline-flex w-full items-center justify-center rounded-full border border-[color:var(--line)] bg-white px-4 py-3 text-sm font-semibold text-[color:var(--foreground)] transition hover:bg-[color:var(--panel-strong)] sm:w-fit"

@@ -1,7 +1,9 @@
 import { shops } from "@/data/shops";
 import { outboundActionLabels, type OutboundAction } from "@/lib/outboundActions";
 
-const OUTBOUND_CLICKS_KEY = "openchair:outbound_clicks:v1";
+const PRIMARY_OUTBOUND_CLICKS_KEY = "chairradar:outbound_clicks:v1";
+const LEGACY_OUTBOUND_CLICKS_KEY = "openchair:outbound_clicks:v1";
+const OUTBOUND_CLICKS_KEYS = [PRIMARY_OUTBOUND_CLICKS_KEY, LEGACY_OUTBOUND_CLICKS_KEY];
 const THIRTY_DAYS_MS = 30 * 24 * 60 * 60 * 1000;
 const SEVEN_DAYS_MS = 7 * 24 * 60 * 60 * 1000;
 
@@ -97,7 +99,7 @@ export async function recordOutboundClick(
 
   await redisCommand<number>([
     "ZADD",
-    OUTBOUND_CLICKS_KEY,
+    PRIMARY_OUTBOUND_CLICKS_KEY,
     fullEvent.timestampMs,
     JSON.stringify(fullEvent)
   ]);
@@ -147,18 +149,26 @@ export async function getOutboundClickStats() {
   const thirtyDaysAgo = now - THIRTY_DAYS_MS;
   const sevenDaysAgo = now - SEVEN_DAYS_MS;
 
-  const [totalClicks, rawEvents] = await Promise.all([
-    redisCommand<number>(["ZCOUNT", OUTBOUND_CLICKS_KEY, "-inf", "+inf"]),
-    redisCommand<string[]>([
-      "ZRANGEBYSCORE",
-      OUTBOUND_CLICKS_KEY,
-      thirtyDaysAgo,
-      now,
-      "LIMIT",
-      0,
-      5000
-    ])
+  const [totalClickCounts, rawEventGroups] = await Promise.all([
+    Promise.all(
+      OUTBOUND_CLICKS_KEYS.map((key) => redisCommand<number>(["ZCOUNT", key, "-inf", "+inf"]))
+    ),
+    Promise.all(
+      OUTBOUND_CLICKS_KEYS.map((key) =>
+        redisCommand<string[]>([
+          "ZRANGEBYSCORE",
+          key,
+          thirtyDaysAgo,
+          now,
+          "LIMIT",
+          0,
+          5000
+        ])
+      )
+    )
   ]);
+  const totalClicks = totalClickCounts.reduce((sum, count) => sum + count, 0);
+  const rawEvents = rawEventGroups.flat();
 
   const events = rawEvents.map(parseEvent).filter((event): event is OutboundClickEvent =>
     Boolean(event)

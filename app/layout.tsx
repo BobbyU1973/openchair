@@ -8,17 +8,17 @@ import "./globals.css";
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
   title: {
-    default: "OpenChair | Find Nearby Haircut Availability Fast",
-    template: "%s | OpenChair"
+    default: "ChairRadar | Find Nearby Haircut Availability Fast",
+    template: "%s | ChairRadar"
   },
   verification: {
     google: "Vw9myqX8OlyKcfUvRSAfE00UMDuKrcHaebJiTozf1yA"
   },
   description:
-    "Find nearby haircut shops fast with open-now signals, walk-in options, click-to-call phone numbers, and direct booking links on OpenChair.",
-  applicationName: "OpenChair",
+    "Find nearby haircut shops fast with open-now signals, walk-in options, click-to-call phone numbers, and direct booking links on ChairRadar.",
+  applicationName: "ChairRadar",
   keywords: [
-    "OpenChair",
+    "ChairRadar",
     "haircut availability",
     "barber near me",
     "walk-in haircut",
@@ -29,11 +29,11 @@ export const metadata: Metadata = {
     "barbershop north carolina"
   ],
   openGraph: {
-    title: "OpenChair",
+    title: "ChairRadar",
     description:
       "Find nearby haircut shops fast with walk-in options, direct booking links, and click-to-call shop details.",
     url: SITE_URL,
-    siteName: "OpenChair",
+    siteName: "ChairRadar",
     type: "website"
   }
 };

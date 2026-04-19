@@ -1,4 +1,5 @@
 import { SearchBar } from "@/components/SearchBar";
+import { shops } from "@/data/shops";
 
 export function Hero() {
   return (
@@ -6,13 +7,13 @@ export function Hero() {
       <div className="mx-auto grid max-w-7xl gap-10 lg:grid-cols-[1.05fr_0.95fr] lg:items-center">
         <div className="max-w-2xl">
           <span className="inline-flex rounded-full border border-[color:var(--line)] bg-white/80 px-4 py-2 text-xs font-semibold uppercase tracking-[0.24em] text-[color:var(--muted)]">
-            Live OpenChair launch
+            Live ChairRadar launch
           </span>
           <h1 className="mt-6 text-4xl font-semibold tracking-tight text-[color:var(--foreground)] sm:text-5xl lg:text-6xl">
             Find nearby haircut availability fast.
           </h1>
           <p className="mt-5 max-w-xl text-lg leading-8 text-[color:var(--muted)]">
-            OpenChair helps people across North Carolina start with real nearby haircut shops, beginning with the current Lake Norman coverage area, then click through or call the shop directly to reserve a spot.
+            ChairRadar helps people across North Carolina start with real nearby haircut shops, beginning with the current Lake Norman coverage area, then click through or call the shop directly to reserve a spot.
           </p>
 
           <div className="mt-8">
@@ -27,7 +28,7 @@ export function Hero() {
 
           <div className="mt-8 grid gap-4 sm:grid-cols-3">
             <div className="rounded-[24px] border border-[color:var(--line)] bg-white/78 px-5 py-5">
-              <p className="text-2xl font-semibold">6</p>
+              <p className="text-2xl font-semibold">{shops.length}</p>
               <p className="mt-1 text-sm text-[color:var(--muted)]">Real local listings</p>
             </div>
             <div className="rounded-[24px] border border-[color:var(--line)] bg-white/78 px-5 py-5">
@@ -72,8 +73,8 @@ export function Hero() {
             </p>
             <div className="mt-4 space-y-3 text-sm leading-7 text-[color:var(--muted)]">
               <p>Listings point to real public booking pages and shop phone numbers.</p>
-              <p>OpenChair stays lightweight by helping users discover and contact shops fast.</p>
-              <p>OpenChair is rolling out North Carolina coverage market by market, starting around 28117.</p>
+              <p>ChairRadar stays lightweight by helping users discover and contact shops fast.</p>
+              <p>ChairRadar is rolling out North Carolina coverage market by market, starting around 28117.</p>
             </div>
           </div>
         </div>

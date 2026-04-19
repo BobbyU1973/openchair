@@ -1,6 +1,6 @@
-# OpenChair
+# ChairRadar
 
-OpenChair is a simple MVP for helping people find nearby haircut availability fast.
+ChairRadar is a simple MVP for helping people find nearby haircut availability fast.
 
 ## Stack
 
@@ -30,8 +30,10 @@ UPSTASH_REDIS_REST_URL=https://example-upstash-url.upstash.io
 UPSTASH_REDIS_REST_TOKEN=example-upstash-token
 KV_REST_API_URL=https://example-vercel-kv-url.upstash.io
 KV_REST_API_TOKEN=example-vercel-kv-token
-OPENCHAIR_ADMIN_KEY=replace-with-a-long-private-admin-key
+CHAIRRADAR_ADMIN_KEY=replace-with-a-long-private-admin-key
 ```
+
+The current Vercel URL may still include the old project slug until a ChairRadar domain is connected.
 
 This app uses:
 
@@ -58,7 +60,7 @@ Tracked actions:
 The hidden internal report is available at:
 
 ```text
-/internal/outbound-clicks?key=YOUR_OPENCHAIR_ADMIN_KEY
+/internal/outbound-clicks?key=YOUR_CHAIRRADAR_ADMIN_KEY
 ```
 
-The report is not indexed and requires `OPENCHAIR_ADMIN_KEY`. If Upstash is not configured, no fake metrics are shown.
+The report is not indexed and requires `CHAIRRADAR_ADMIN_KEY`. Existing deployments can keep using `OPENCHAIR_ADMIN_KEY` as a fallback until the Vercel environment variable is renamed. If Upstash is not configured, no fake metrics are shown.
