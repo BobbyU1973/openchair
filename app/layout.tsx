@@ -8,14 +8,14 @@ import "./globals.css";
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
   title: {
-    default: "ChairRadar | Find Nearby Haircut Availability Fast",
+    default: "ChairRadar | Find a Haircut Near You Fast",
     template: "%s | ChairRadar"
   },
   verification: {
     google: "Vw9myqX8OlyKcfUvRSAfE00UMDuKrcHaebJiTozf1yA"
   },
   description:
-    "Find nearby haircut shops fast with open-now signals, walk-in options, click-to-call phone numbers, and direct booking links on ChairRadar.",
+    "Find nearby haircut shops fast with call buttons, booking links, walk-in info, public shop pages, and directions on ChairRadar.",
   applicationName: "ChairRadar",
   keywords: [
     "ChairRadar",
@@ -31,7 +31,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: "ChairRadar",
     description:
-      "Find nearby haircut shops fast with walk-in options, direct booking links, and click-to-call shop details.",
+      "Find nearby haircut shops fast with call buttons, booking links, walk-in info, public shop pages, and directions.",
     url: SITE_URL,
     siteName: "ChairRadar",
     type: "website"

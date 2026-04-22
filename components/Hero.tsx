@@ -7,24 +7,22 @@ export function Hero() {
       <div className="mx-auto grid max-w-7xl gap-10 lg:grid-cols-[1.05fr_0.95fr] lg:items-center">
         <div className="max-w-2xl">
           <span className="inline-flex rounded-full border border-[color:var(--line)] bg-white/80 px-4 py-2 text-xs font-semibold uppercase tracking-[0.24em] text-[color:var(--muted)]">
-            Live ChairRadar launch
+            Find local haircut options
           </span>
           <h1 className="mt-6 text-4xl font-semibold tracking-tight text-[color:var(--foreground)] sm:text-5xl lg:text-6xl">
-            Find nearby haircut availability fast.
+            Find a haircut near you fast.
           </h1>
           <p className="mt-5 max-w-xl text-lg leading-8 text-[color:var(--muted)]">
-            ChairRadar helps people across North Carolina start with real nearby haircut shops, beginning with the current Lake Norman coverage area, then click through or call the shop directly to reserve a spot.
+            See nearby haircut shops with call buttons, booking links, walk-in info, and directions - starting with Lake Norman, Mooresville, Cornelius, Huntersville, Denver, and nearby ZIPs.
           </p>
 
           <div className="mt-8">
-            <SearchBar />
+            <SearchBar buttonLabel="Find nearby haircut shops" />
           </div>
 
-          <div className="mt-6 flex flex-wrap gap-3 text-sm text-[color:var(--muted)]">
-            <span className="rounded-full border border-[color:var(--line)] bg-white/80 px-4 py-2">Real local shop links</span>
-            <span className="rounded-full border border-[color:var(--line)] bg-white/80 px-4 py-2">Call or click to reserve</span>
-            <span className="rounded-full border border-[color:var(--line)] bg-white/80 px-4 py-2">North Carolina rollout underway</span>
-          </div>
+          <p className="mt-5 text-sm font-semibold text-[color:var(--muted)]">
+            Real public shop pages. Real phone numbers. No fake availability counters.
+          </p>
 
           <div className="mt-8 grid gap-4 sm:grid-cols-3">
             <div className="rounded-[24px] border border-[color:var(--line)] bg-white/78 px-5 py-5">
@@ -32,12 +30,12 @@ export function Hero() {
               <p className="mt-1 text-sm text-[color:var(--muted)]">Real local listings</p>
             </div>
             <div className="rounded-[24px] border border-[color:var(--line)] bg-white/78 px-5 py-5">
-              <p className="text-2xl font-semibold">28117</p>
-              <p className="mt-1 text-sm text-[color:var(--muted)]">Current lead launch ZIP</p>
+              <p className="text-2xl font-semibold">5</p>
+              <p className="mt-1 text-sm text-[color:var(--muted)]">Local areas covered</p>
             </div>
             <div className="rounded-[24px] border border-[color:var(--line)] bg-white/78 px-5 py-5">
               <p className="text-2xl font-semibold">Call</p>
-              <p className="mt-1 text-sm text-[color:var(--muted)]">Or click to reserve</p>
+              <p className="mt-1 text-sm text-[color:var(--muted)]">Book or get directions</p>
             </div>
           </div>
         </div>
@@ -69,12 +67,11 @@ export function Hero() {
 
           <div className="mt-5 rounded-[28px] bg-white p-5">
             <p className="text-sm font-semibold uppercase tracking-[0.22em] text-[color:var(--muted)]">
-              Why it feels trustworthy
+              Why it helps
             </p>
             <div className="mt-4 space-y-3 text-sm leading-7 text-[color:var(--muted)]">
-              <p>Listings point to real public booking pages and shop phone numbers.</p>
+              <p>Start with nearby shops, then call, open the shop website, use a booking link, or get directions.</p>
               <p>ChairRadar stays lightweight by helping users discover and contact shops fast.</p>
-              <p>ChairRadar is rolling out North Carolina coverage market by market, starting around 28117.</p>
             </div>
           </div>
         </div>

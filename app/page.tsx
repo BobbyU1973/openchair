@@ -6,6 +6,21 @@ import { ShopCard } from "@/components/ShopCard";
 import { locationPages } from "@/data/locationPages";
 import { shops } from "@/data/shops";
 
+const popularSearchPageIds = [
+  "mooresville-haircuts",
+  "mooresville-walk-in-haircuts",
+  "mooresville-28117",
+  "cornelius-haircuts",
+  "huntersville-haircuts",
+  "denver-haircuts",
+  "lake-norman-open-now-haircuts",
+  "lake-norman-kids-haircuts"
+];
+
+const popularSearchPages = popularSearchPageIds
+  .map((pageId) => locationPages.find((page) => page.id === pageId))
+  .filter((page): page is (typeof locationPages)[number] => Boolean(page));
+
 export default function HomePage() {
   const featuredShops = shops.slice(0, 3);
 
@@ -13,6 +28,44 @@ export default function HomePage() {
     <main>
       <Header />
       <Hero />
+
+      <section className="px-4 pb-14 sm:px-6 lg:px-8">
+        <div className="mx-auto max-w-7xl rounded-[32px] border border-[color:var(--line)] bg-white/82 p-5 shadow-[var(--shadow)] sm:p-6 lg:p-8">
+          <div className="flex flex-col justify-between gap-4 md:flex-row md:items-end">
+            <div>
+              <p className="text-sm font-semibold uppercase tracking-[0.24em] text-[color:var(--muted)]">
+                Popular haircut searches
+              </p>
+              <h2 className="mt-3 text-3xl font-semibold tracking-tight">
+                Start with the searches people use most.
+              </h2>
+            </div>
+            <Link
+              href="/nc/lake-norman/haircuts"
+              className="inline-flex w-fit rounded-full border border-[color:var(--line)] bg-white px-5 py-3 text-sm font-semibold"
+            >
+              Browse Lake Norman
+            </Link>
+          </div>
+
+          <div className="mt-6 grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
+            {popularSearchPages.map((page) => (
+              <Link
+                key={page.id}
+                href={page.href}
+                className="rounded-[24px] border border-[color:var(--line)] bg-[color:var(--panel-strong)] p-4 transition hover:-translate-y-1"
+              >
+                <p className="text-xs font-semibold uppercase tracking-[0.18em] text-[color:var(--muted)]">
+                  {page.areaName}
+                </p>
+                <h3 className="mt-2 text-lg font-semibold tracking-tight">
+                  {page.metaTitle}
+                </h3>
+              </Link>
+            ))}
+          </div>
+        </div>
+      </section>
 
       <section id="popular-nearby" className="px-4 pb-16 sm:px-6 lg:px-8">
         <div className="mx-auto max-w-7xl">
@@ -22,10 +75,10 @@ export default function HomePage() {
                 Popular nearby
               </p>
               <h2 className="mt-3 text-3xl font-semibold tracking-tight sm:text-4xl">
-                Real haircut shops in the current North Carolina launch coverage
+                Nearby haircut shops to compare fast
               </h2>
               <p className="mt-3 max-w-2xl text-[color:var(--muted)]">
-                ChairRadar is starting around Lake Norman with real public booking pages and direct call links, then expanding coverage market by market across North Carolina.
+                See real public shop pages, phone numbers, walk-in signals, booking links, websites, and directions before deciding where to go.
               </p>
             </div>
             <Link
@@ -48,18 +101,18 @@ export default function HomePage() {
         <div className="mx-auto max-w-7xl rounded-[36px] border border-[color:var(--line)] bg-white/78 p-6 shadow-[var(--shadow)] lg:p-10">
           <div className="max-w-3xl">
             <p className="text-sm font-semibold uppercase tracking-[0.24em] text-[color:var(--muted)]">
-              Local haircut pages
+              North Carolina rollout
             </p>
             <h2 className="mt-3 text-3xl font-semibold tracking-tight sm:text-4xl">
-              Browse Lake Norman and Mooresville haircut options
+              Starting with Lake Norman, then expanding market by market
             </h2>
             <p className="mt-3 text-[color:var(--muted)]">
-              These focused pages help people find nearby haircut shops by location and intent, while giving Google useful pages to crawl.
+              ChairRadar is focused on making each local page useful before expanding too broadly. The current coverage includes Mooresville, Cornelius, Huntersville, Denver, Sherrills Ford, and nearby ZIPs.
             </p>
           </div>
 
-          <div className="mt-8 grid gap-4 md:grid-cols-2 lg:grid-cols-3">
-            {locationPages.map((page) => (
+          <div className="mt-8 grid gap-4 md:grid-cols-2 lg:grid-cols-4">
+            {popularSearchPages.slice(0, 4).map((page) => (
               <Link
                 key={page.id}
                 href={page.href}
@@ -85,7 +138,7 @@ export default function HomePage() {
           {[
             {
               title: "Search by ZIP or city",
-              text: "Enter a North Carolina ZIP or city and ChairRadar will surface the current coverage area while expansion continues market by market."
+              text: "Enter a ZIP or city and ChairRadar surfaces nearby haircut shops from the current coverage area."
             },
             {
               title: "Compare real public info",

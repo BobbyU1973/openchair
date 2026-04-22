@@ -6,11 +6,13 @@ import { trackEvent } from "@/lib/analytics";
 type SearchBarProps = {
   defaultLocation?: string;
   compact?: boolean;
+  buttonLabel?: string;
 };
 
 export function SearchBar({
   defaultLocation = "Near me",
-  compact = false
+  compact = false,
+  buttonLabel = "Find shops fast"
 }: SearchBarProps) {
   const [location, setLocation] = useState(
     defaultLocation === "Near me" ? "" : defaultLocation
@@ -55,7 +57,7 @@ export function SearchBar({
         className="w-full rounded-[22px] bg-[color:var(--accent)] px-6 py-4 text-base font-semibold text-white shadow-[0_14px_34px_rgba(191,90,42,0.28)] transition hover:bg-[color:var(--accent-dark)] md:w-auto"
         type="submit"
       >
-        Find shops fast
+        {buttonLabel}
       </button>
     </form>
   );

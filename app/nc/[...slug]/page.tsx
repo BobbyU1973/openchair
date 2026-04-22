@@ -21,6 +21,46 @@ type LocationLandingPageProps = {
   }>;
 };
 
+function getIntentSummary(page: (typeof locationPages)[number]) {
+  if (page.shopFilter === "walkIns") {
+    return "walk-in friendly shops, online check-in options, and same-day call paths";
+  }
+
+  if (page.shopFilter === "openNow") {
+    return "shops marked open now with quick call, booking, website, and directions links";
+  }
+
+  if (page.shopFilter === "kids") {
+    return "shops that publicly list kids cuts or family-friendly haircut options";
+  }
+
+  if (page.shopFilter === "mens") {
+    return "barbershops, fades, beard services, and men's haircut options";
+  }
+
+  return "nearby haircut shops with public phone, booking, website, and directions links";
+}
+
+function getBeforeYouGoItems(page: (typeof locationPages)[number]) {
+  return [
+    {
+      title: "Confirm today's hours",
+      text: "Shop hours and online check-in windows can change. Call or open the shop page before driving."
+    },
+    {
+      title: page.shopFilter === "walkIns" ? "Ask about walk-ins" : "Choose the fastest next step",
+      text:
+        page.shopFilter === "walkIns"
+          ? "Walk-in friendly does not always mean no wait. A quick call can save a wasted trip."
+          : "If you are in a hurry, call first. If booking is available, use the shop link to check the current calendar."
+    },
+    {
+      title: "Use directions last",
+      text: "Once you choose a shop, open directions from ChairRadar so the trip starts from the listing you selected."
+    }
+  ];
+}
+
 export function generateStaticParams() {
   return locationPages.map((page) => ({
     slug: page.segments
@@ -71,6 +111,8 @@ export default async function LocationLandingPage({
   const relatedPages = getRelatedLocationPages(page);
   const summary = getShopLocationSummary(pageShops);
   const structuredData = getLocationPageStructuredData(page, pageShops);
+  const intentSummary = getIntentSummary(page);
+  const beforeYouGoItems = getBeforeYouGoItems(page);
 
   return (
     <main>
@@ -92,6 +134,9 @@ export default async function LocationLandingPage({
             <p className="mt-5 max-w-3xl text-lg leading-8 text-[color:var(--muted)]">
               {page.description}
             </p>
+            <p className="mt-4 max-w-3xl text-base leading-7 text-[color:var(--muted)]">
+              Use this page to compare {intentSummary} in {page.areaName}, then pick the fastest way to contact the shop.
+            </p>
             <p className="mt-4 inline-flex rounded-full border border-[color:var(--line)] bg-white/80 px-4 py-2 text-sm font-semibold text-[color:var(--muted)]">
               {page.lastUpdatedLabel}
             </p>
@@ -110,6 +155,12 @@ export default async function LocationLandingPage({
             <p className="mt-3 text-sm leading-7 text-[color:var(--muted)]">
               {page.intro}
             </p>
+            <div className="mt-5 rounded-[24px] bg-[color:var(--panel-strong)] p-4">
+              <p className="text-xs font-semibold uppercase tracking-[0.2em] text-[color:var(--muted)]">
+                Best for
+              </p>
+              <p className="mt-2 text-sm font-medium leading-6">{intentSummary}</p>
+            </div>
             <p className="mt-4 text-sm leading-7 text-[color:var(--muted)]">
               Coverage includes {summary.cities.join(", ")}. Listings use public shop pages,
               phone numbers, and booking links where available.
@@ -136,8 +187,8 @@ export default async function LocationLandingPage({
                 Nearby haircut options
               </h2>
               <p className="mt-3 max-w-2xl text-[color:var(--muted)]">
-                Tap to call, book on the shop site, visit the website, or get directions.
-                ChairRadar tracks real outbound clicks, not fake booking counters.
+                Start with the listing, then call, book on the shop site, visit the website, or get directions.
+                No fake availability counters are shown.
               </p>
             </div>
             <Link
@@ -161,36 +212,30 @@ export default async function LocationLandingPage({
       </section>
 
       <section className="px-4 pb-14 sm:px-6 lg:px-8">
-        <div className="mx-auto grid max-w-7xl gap-6 lg:grid-cols-3">
-          {[
-            {
-              title: "How ChairRadar chooses listings",
-              text: "This page focuses on public-facing haircut shops in the current launch coverage area, including shops with phone, website, directions, or booking access."
-            },
-            {
-              title: "What to check before you go",
-              text: "Hours, walk-in status, and online check-in can change during the day. Use the call, booking, website, or directions buttons to confirm before driving."
-            },
-            {
-              title: "Why this page exists",
-              text: "Most users just need a fast path to a haircut. ChairRadar keeps the experience lightweight by helping people compare nearby options and contact shops directly."
-            }
-          ].map((item) => (
-            <div
-              key={item.title}
-              className="rounded-[30px] border border-[color:var(--line)] bg-white/78 p-6 shadow-[var(--shadow)]"
-            >
-              <h2 className="text-2xl font-semibold tracking-tight">{item.title}</h2>
-              <p className="mt-3 leading-7 text-[color:var(--muted)]">{item.text}</p>
-            </div>
-          ))}
+        <div className="mx-auto max-w-7xl rounded-[34px] border border-[color:var(--line)] bg-white/78 p-6 shadow-[var(--shadow)] sm:p-8">
+          <div className="max-w-3xl">
+            <p className="text-sm font-semibold uppercase tracking-[0.22em] text-[color:var(--muted)]">
+              Before you go
+            </p>
+            <h2 className="mt-3 text-3xl font-semibold tracking-tight">
+              Quick checks before choosing a haircut shop
+            </h2>
+          </div>
+          <div className="mt-6 grid gap-4 lg:grid-cols-3">
+            {beforeYouGoItems.map((item) => (
+              <div key={item.title} className="rounded-[26px] bg-[color:var(--panel-strong)] p-5">
+                <h3 className="text-xl font-semibold tracking-tight">{item.title}</h3>
+                <p className="mt-3 text-sm leading-6 text-[color:var(--muted)]">{item.text}</p>
+              </div>
+            ))}
+          </div>
         </div>
       </section>
 
       <section className="px-4 pb-24 sm:px-6 lg:px-8">
         <div className="mx-auto max-w-7xl rounded-[34px] border border-[color:var(--line)] bg-white/78 p-6 shadow-[var(--shadow)] sm:p-8">
           <h2 className="text-3xl font-semibold tracking-tight">
-            More Lake Norman haircut pages
+            Related haircut searches near {page.areaName}
           </h2>
           <div className="mt-6 grid gap-4 md:grid-cols-3">
             {relatedPages.map((relatedPage) => (
@@ -205,9 +250,6 @@ export default async function LocationLandingPage({
                 <h3 className="mt-3 text-xl font-semibold tracking-tight">
                   {relatedPage.heading}
                 </h3>
-                <p className="mt-3 text-sm leading-6 text-[color:var(--muted)]">
-                  {relatedPage.metaDescription}
-                </p>
               </Link>
             ))}
           </div>

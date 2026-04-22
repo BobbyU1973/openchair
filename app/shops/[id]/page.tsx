@@ -5,7 +5,8 @@ import { Header } from "@/components/Header";
 import { SiteFooter } from "@/components/SiteFooter";
 import { TrackedExternalLink } from "@/components/TrackedExternalLink";
 import { TrackEvent } from "@/components/TrackEvent";
-import { shops } from "@/data/shops";
+import { locationPages } from "@/data/locationPages";
+import { shops, type Shop } from "@/data/shops";
 import { getOutboundHref } from "@/lib/outboundActions";
 import { SITE_URL } from "@/lib/site";
 import {
@@ -19,6 +20,49 @@ type ShopDetailPageProps = {
   }>;
 };
 
+function getShopSummary(shop: Shop) {
+  const action = shop.bookingUrl
+    ? `Use ${shop.bookingLabel.toLowerCase()} or call the shop directly.`
+    : "Call the shop directly or visit the website before you go.";
+
+  return `${shop.name} is a ${shop.city}, ${shop.state} haircut option in the ${shop.neighborhood} area. ChairRadar shows the public phone number, address, walk-in signal, booking path, and directions so you can decide quickly. ${action}`;
+}
+
+function getBestForItems(shop: Shop) {
+  const items = [...shop.specialties.slice(0, 3)];
+
+  if (shop.walkInsAvailable && !items.some((item) => item.toLowerCase().includes("walk"))) {
+    items.push("Walk-in friendly");
+  }
+
+  if (shop.bookingUrl && items.length < 4) {
+    items.push("Online booking or check-in");
+  }
+
+  return items.slice(0, 4);
+}
+
+function getBeforeYouGoItems(shop: Shop) {
+  return [
+    shop.walkInsAvailable
+      ? "Walk-ins are listed as available, but calling first can help avoid a wait."
+      : "Appointments are recommended based on the available public listing details.",
+    shop.bookingUrl
+      ? `Open ${shop.bookingLabel.toLowerCase()} to check the shop's current booking or check-in path.`
+      : "Use the phone number or website to confirm same-day availability.",
+    "Confirm today's hours before driving, especially near closing time or on weekends."
+  ];
+}
+
+function getRelatedSearchPages(shop: Shop) {
+  const directMatches = locationPages.filter((page) => {
+    return page.cityNames.includes(shop.city) || page.zipCodes.includes(shop.zip);
+  });
+  const broaderMatches = locationPages.filter((page) => page.id.startsWith("lake-norman"));
+
+  return Array.from(new Map([...directMatches, ...broaderMatches].map((page) => [page.id, page])).values()).slice(0, 4);
+}
+
 export async function generateMetadata({
   params
 }: ShopDetailPageProps): Promise<Metadata> {
@@ -31,11 +75,11 @@ export async function generateMetadata({
     };
   }
 
-  const description = `${shop.name} in ${shop.city}, ${shop.state}. See phone, hours, walk-in status, and direct booking or website links on ChairRadar.`;
+  const description = `${shop.name} in ${shop.city}, ${shop.state}. See phone, address, hours, walk-in status, booking or website links, and directions on ChairRadar.`;
   const url = `${SITE_URL}/shops/${shop.id}`;
 
   return {
-    title: shop.name,
+    title: `${shop.name} in ${shop.city}, ${shop.state}`,
     description,
     alternates: {
       canonical: url
@@ -85,6 +129,10 @@ export default async function ShopDetailPage({ params }: ShopDetailPageProps) {
   const websiteHref = getOutboundHref(shop.id, "visit_website", "detail_website_button");
   const directionsHref = getOutboundHref(shop.id, "get_directions", "detail_directions_button");
   const phoneRowHref = getOutboundHref(shop.id, "call_shop", "detail_phone_row");
+  const shopSummary = getShopSummary(shop);
+  const bestForItems = getBestForItems(shop);
+  const beforeYouGoItems = getBeforeYouGoItems(shop);
+  const relatedSearchPages = getRelatedSearchPages(shop);
   const structuredData = [
     getShopStructuredData(shop),
     getBreadcrumbStructuredData([
@@ -151,6 +199,10 @@ export default async function ShopDetailPage({ params }: ShopDetailPageProps) {
                 <p>{shop.city}, {shop.state} {shop.zip}</p>
               </div>
 
+              <p className="mt-6 max-w-3xl text-lg leading-8 text-[color:var(--muted)]">
+                {shopSummary}
+              </p>
+
               <div className="mt-8 grid gap-4 md:grid-cols-2">
                 <div className="rounded-[28px] bg-[color:var(--panel-strong)] p-5">
                   <p className="text-sm font-semibold uppercase tracking-[0.2em] text-[color:var(--muted)]">
@@ -194,15 +246,44 @@ export default async function ShopDetailPage({ params }: ShopDetailPageProps) {
                   Specialty services: {shop.specialties.join(", ")}
                 </p>
               </div>
+
+              <div className="mt-8 grid gap-4 md:grid-cols-2">
+                <div className="rounded-[28px] bg-[color:var(--panel-strong)] p-6">
+                  <p className="text-sm font-semibold uppercase tracking-[0.2em] text-[color:var(--muted)]">
+                    Best for
+                  </p>
+                  <div className="mt-4 flex flex-wrap gap-2">
+                    {bestForItems.map((item) => (
+                      <span
+                        key={item}
+                        className="rounded-full border border-[color:var(--line)] bg-white px-3 py-2 text-sm font-medium"
+                      >
+                        {item}
+                      </span>
+                    ))}
+                  </div>
+                </div>
+
+                <div className="rounded-[28px] bg-[color:var(--panel-strong)] p-6">
+                  <p className="text-sm font-semibold uppercase tracking-[0.2em] text-[color:var(--muted)]">
+                    Before you go
+                  </p>
+                  <div className="mt-4 grid gap-3 text-sm leading-6 text-[color:var(--muted)]">
+                    {beforeYouGoItems.map((item) => (
+                      <p key={item}>{item}</p>
+                    ))}
+                  </div>
+                </div>
+              </div>
             </div>
 
             <aside className="order-first h-fit rounded-[34px] border border-[color:var(--line)] bg-[rgba(255,250,243,0.94)] p-6 shadow-[var(--shadow)] sm:p-7 lg:order-none lg:sticky lg:top-24">
               <p className="text-sm font-semibold uppercase tracking-[0.24em] text-[color:var(--muted)]">
-                Reserve directly
+                Take action
               </p>
-              <p className="mt-4 text-3xl font-semibold tracking-tight">{shop.availabilitySummary}</p>
+              <p className="mt-4 text-3xl font-semibold tracking-tight">Call, book, or get directions</p>
               <p className="mt-3 text-[color:var(--muted)]">
-                ChairRadar sends people straight to the shop to reserve through the public booking link or by phone.
+                ChairRadar sends you straight to the shop's public phone, booking path, website, or map.
               </p>
 
               {shop.bookingUrl ? (
@@ -296,6 +377,26 @@ export default async function ShopDetailPage({ params }: ShopDetailPageProps) {
                 </p>
               </div>
             </aside>
+          </div>
+
+          <div className="mt-8 rounded-[34px] border border-[color:var(--line)] bg-white/78 p-6 shadow-[var(--shadow)] sm:p-8">
+            <h2 className="text-3xl font-semibold tracking-tight">
+              Related haircut searches near {shop.city}
+            </h2>
+            <div className="mt-6 grid gap-4 md:grid-cols-2 lg:grid-cols-4">
+              {relatedSearchPages.map((page) => (
+                <Link
+                  key={page.id}
+                  href={page.href}
+                  className="rounded-[24px] border border-[color:var(--line)] bg-[color:var(--panel-strong)] p-5 transition hover:-translate-y-1"
+                >
+                  <p className="text-xs font-semibold uppercase tracking-[0.18em] text-[color:var(--muted)]">
+                    {page.areaName}
+                  </p>
+                  <h3 className="mt-2 text-lg font-semibold tracking-tight">{page.metaTitle}</h3>
+                </Link>
+              ))}
+            </div>
           </div>
         </div>
       </section>
