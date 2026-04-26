@@ -105,7 +105,7 @@ export default async function OutboundClicksPage({
                     <p className="text-sm font-semibold uppercase tracking-[0.18em] text-[color:var(--muted)]">
                       {label}
                     </p>
-                    <p className="mt-3 text-4xl font-semibold">
+                    <p className="mt-3 inline-block pr-1 text-[clamp(2.5rem,4vw,3.75rem)] font-semibold leading-none [font-variant-numeric:tabular-nums]">
                       {formatNumber(Number(value))}
                     </p>
                   </div>
@@ -167,7 +167,7 @@ export default async function OutboundClicksPage({
                           className="flex items-center justify-between gap-4 rounded-[20px] bg-[color:var(--panel-strong)] px-4 py-4"
                         >
                           <span className="font-medium">{label}</span>
-                          <span className="text-xl font-semibold">
+                          <span className="shrink-0 pl-3 text-2xl font-semibold leading-none [font-variant-numeric:tabular-nums]">
                             {formatNumber(actionStats?.count ?? 0)}
                           </span>
                         </div>
