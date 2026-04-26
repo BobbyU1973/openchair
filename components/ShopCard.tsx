@@ -68,6 +68,7 @@ export function ShopCard({ shop, sourcePage = "results" }: ShopCardProps) {
             </p>
             <a
               href={inlineCallHref}
+              rel="nofollow noopener noreferrer"
               onClick={() =>
                 trackEvent("call_click", {
                   ...baseEventParams,
@@ -107,6 +108,7 @@ export function ShopCard({ shop, sourcePage = "results" }: ShopCardProps) {
           <div className="grid gap-3 sm:flex sm:flex-wrap sm:justify-end">
             <a
               href={callHref}
+              rel="nofollow noopener noreferrer"
               onClick={() =>
                 trackEvent("call_click", {
                   ...baseEventParams,
@@ -120,7 +122,7 @@ export function ShopCard({ shop, sourcePage = "results" }: ShopCardProps) {
             <a
               href={primaryHref}
               target="_blank"
-              rel="noreferrer"
+              rel="nofollow noopener noreferrer"
               onClick={() =>
                 trackEvent(shop.bookingUrl ? "booking_click" : "website_click", {
                   ...baseEventParams,
@@ -134,7 +136,7 @@ export function ShopCard({ shop, sourcePage = "results" }: ShopCardProps) {
             <a
               href={directionsHref}
               target="_blank"
-              rel="noreferrer"
+              rel="nofollow noopener noreferrer"
               onClick={() =>
                 trackEvent("directions_click", {
                   ...baseEventParams,
@@ -149,7 +151,7 @@ export function ShopCard({ shop, sourcePage = "results" }: ShopCardProps) {
               <a
                 href={websiteHref}
                 target="_blank"
-                rel="noreferrer"
+                rel="nofollow noopener noreferrer"
                 onClick={() =>
                   trackEvent("website_click", {
                     ...baseEventParams,

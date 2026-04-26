@@ -8,12 +8,17 @@ import { recordOutboundClick } from "@/lib/outboundTracking";
 
 export const dynamic = "force-dynamic";
 
+const outboundHeaders = {
+  "Cache-Control": "no-store",
+  "X-Robots-Tag": "noindex, nofollow, noarchive"
+};
+
 function redirectTo(destination: string) {
   return new Response(null, {
     status: 307,
     headers: {
       Location: destination,
-      "Cache-Control": "no-store"
+      ...outboundHeaders
     }
   });
 }
@@ -25,19 +30,28 @@ export async function GET(request: NextRequest) {
   const sourcePage = searchParams.get("source") ?? "unknown";
 
   if (!shopId || !isOutboundAction(action)) {
-    return new Response("Outbound action not found.", { status: 404 });
+    return new Response("Outbound action not found.", {
+      status: 404,
+      headers: outboundHeaders
+    });
   }
 
   const shop = shops.find((item) => item.id === shopId);
 
   if (!shop) {
-    return new Response("Shop not found.", { status: 404 });
+    return new Response("Shop not found.", {
+      status: 404,
+      headers: outboundHeaders
+    });
   }
 
   const destination = getOutboundDestination(shop, action);
 
   if (!destination) {
-    return new Response("Destination not available.", { status: 404 });
+    return new Response("Destination not available.", {
+      status: 404,
+      headers: outboundHeaders
+    });
   }
 
   try {
