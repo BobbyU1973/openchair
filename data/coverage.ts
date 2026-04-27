@@ -12,8 +12,15 @@ export type CoverageArea = {
   pageIds: string[];
 };
 
+function getPageIdsByPrefix(prefixes: string[]) {
+  return locationPages
+    .filter((page) => prefixes.some((prefix) => page.id.startsWith(prefix)))
+    .map((page) => page.id);
+}
+
 const liveCityPageIds = [
   "charlotte-haircuts",
+  "raleigh-haircuts",
   "mooresville-haircuts",
   "cornelius-haircuts",
   "huntersville-haircuts",
@@ -26,6 +33,10 @@ const liveZipPageIds = [
   "charlotte-28209",
   "charlotte-28216",
   "charlotte-28273",
+  "raleigh-27615",
+  "raleigh-27617",
+  "raleigh-27603",
+  "raleigh-27609",
   "mooresville-28117",
   "mooresville-28115",
   "cornelius-28031",
@@ -43,16 +54,18 @@ export const liveCoverageAreas: CoverageArea[] = [
     statusLabel: "Live coverage",
     description:
       "Real public chain and shop listings across Charlotte with call, check-in, website, and directions links.",
-    pageIds: [
-      "charlotte-haircuts",
-      "charlotte-walk-in-haircuts",
-      "charlotte-kids-haircuts",
-      "charlotte-mens-haircuts",
-      "charlotte-28277",
-      "charlotte-28209",
-      "charlotte-28216",
-      "charlotte-28273"
-    ]
+    pageIds: getPageIdsByPrefix(["charlotte-"])
+  },
+  {
+    id: "raleigh",
+    name: "Raleigh, NC",
+    stateCode: "NC",
+    stateName: "North Carolina",
+    href: "/nc/raleigh/haircuts",
+    statusLabel: "Live coverage",
+    description:
+      "Real public chain and shop listings across Raleigh with call, check-in, website, and directions links.",
+    pageIds: getPageIdsByPrefix(["raleigh-"])
   },
   {
     id: "lake-norman",
@@ -63,16 +76,21 @@ export const liveCoverageAreas: CoverageArea[] = [
     statusLabel: "Live coverage",
     description:
       "Real public haircut listings across Mooresville, Cornelius, Huntersville, Denver, Sherrills Ford, and nearby ZIPs.",
-    pageIds: [...liveCityPageIds, ...liveZipPageIds]
+    pageIds: getPageIdsByPrefix([
+      "lake-norman-",
+      "mooresville-",
+      "cornelius-",
+      "huntersville-",
+      "denver-"
+    ])
   }
 ];
 
 export const priorityNorthCarolinaMarkets = [
-  "Raleigh",
   "Durham",
+  "Cary",
   "Greensboro",
   "Winston-Salem",
-  "Cary",
   "Wilmington",
   "Asheville",
   "Fayetteville",

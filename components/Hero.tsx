@@ -1,4 +1,5 @@
 import { SearchBar } from "@/components/SearchBar";
+import { liveCoverageAreas } from "@/data/coverage";
 import { shops } from "@/data/shops";
 
 export function Hero() {
@@ -13,7 +14,7 @@ export function Hero() {
             Find a haircut near you fast.
           </h1>
           <p className="mt-5 max-w-xl text-lg leading-8 text-[color:var(--muted)]">
-            See nearby haircut shops with call buttons, booking links, walk-in info, and directions - starting with Lake Norman, Mooresville, Cornelius, Huntersville, Denver, and nearby ZIPs.
+            See nearby haircut shops with call buttons, booking links, walk-in info, and directions - starting with Lake Norman, Charlotte, Raleigh, and nearby ZIPs.
           </p>
 
           <div className="mt-8">
@@ -30,8 +31,8 @@ export function Hero() {
               <p className="mt-1 text-sm text-[color:var(--muted)]">Real local listings</p>
             </div>
             <div className="rounded-[24px] border border-[color:var(--line)] bg-white/78 px-5 py-5">
-              <p className="text-2xl font-semibold">5</p>
-              <p className="mt-1 text-sm text-[color:var(--muted)]">Local areas covered</p>
+              <p className="text-2xl font-semibold">{liveCoverageAreas.length}</p>
+              <p className="mt-1 text-sm text-[color:var(--muted)]">Live NC markets</p>
             </div>
             <div className="rounded-[24px] border border-[color:var(--line)] bg-white/78 px-5 py-5">
               <p className="text-2xl font-semibold">Call</p>
@@ -47,9 +48,9 @@ export function Hero() {
             </p>
             <div className="mt-6 space-y-4">
               {[
-                ["Diesel Barbershop", "Walk-ins + online booking", "28117"],
-                ["Datre Hair Co.", "Book online", "28117"],
-                ["Shears and Beers", "Call or click through", "28117"]
+                ["Great Clips Falls Pointe", "Walk-ins + booking page", "27615"],
+                ["Sport Clips Haircuts of Blakeney", "Check in online", "28277"],
+                ["Diesel Barbershop", "Walk-ins + online booking", "28117"]
               ].map(([name, slot, distance]) => (
                 <div
                   key={name}

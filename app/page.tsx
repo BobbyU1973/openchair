@@ -8,13 +8,17 @@ import { shops } from "@/data/shops";
 import { getHomeStructuredData } from "@/lib/structuredData";
 
 const popularSearchPageIds = [
+  "raleigh-haircuts",
   "charlotte-haircuts",
-  "charlotte-walk-in-haircuts",
-  "charlotte-28277",
-  "charlotte-mens-haircuts",
   "mooresville-haircuts",
+  "raleigh-walk-in-haircuts",
+  "charlotte-walk-in-haircuts",
   "mooresville-walk-in-haircuts",
+  "raleigh-27615",
+  "charlotte-28277",
   "mooresville-28117",
+  "raleigh-mens-haircuts",
+  "charlotte-mens-haircuts",
   "cornelius-haircuts",
   "huntersville-haircuts",
   "denver-haircuts",
@@ -51,10 +55,10 @@ export default function HomePage() {
               </h2>
             </div>
             <Link
-              href="/nc/lake-norman/haircuts"
+              href="/nc/raleigh/haircuts"
               className="inline-flex w-fit rounded-full border border-[color:var(--line)] bg-white px-5 py-3 text-sm font-semibold"
             >
-              Browse Lake Norman
+              Browse Raleigh
             </Link>
           </div>
 
@@ -117,7 +121,7 @@ export default function HomePage() {
               Built for statewide and national expansion, without fake local pages
             </h2>
             <p className="mt-3 text-[color:var(--muted)]">
-              ChairRadar can expand market by market, but local pages should stay useful. Current live coverage includes Charlotte, Mooresville, Cornelius, Huntersville, Denver, Sherrills Ford, and nearby ZIPs.
+              ChairRadar can expand market by market, but local pages should stay useful. Current live coverage includes Raleigh, Charlotte, Mooresville, Cornelius, Huntersville, Denver, and nearby ZIPs.
             </p>
             <div className="mt-5 flex flex-wrap gap-3">
               <Link

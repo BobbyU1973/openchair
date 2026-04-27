@@ -14,7 +14,7 @@ import {
 export const metadata: Metadata = {
   title: "Haircut Shops in North Carolina | ChairRadar",
   description:
-    "Find North Carolina haircut shops with real public phone numbers, booking links, walk-in info, and directions. Current live coverage starts around Lake Norman."
+    "Find North Carolina haircut shops with real public phone numbers, booking links, walk-in info, and directions. Current live coverage includes Raleigh, Charlotte, and Lake Norman."
 };
 
 export default function NorthCarolinaPage() {
@@ -32,12 +32,12 @@ export default function NorthCarolinaPage() {
               Find haircut shops in North Carolina.
             </h1>
             <p className="mt-5 max-w-3xl text-lg leading-8 text-[color:var(--muted)]">
-              ChairRadar is expanding North Carolina market by market. Current live pages include Charlotte and Lake Norman-area public listings so users can call, book, visit a shop website, or get directions quickly.
+              ChairRadar is expanding North Carolina market by market. Current live pages include Raleigh, Charlotte, and Lake Norman-area public listings so users can call, book, visit a shop website, or get directions quickly.
             </p>
           </div>
 
           <div className="mt-8 max-w-3xl">
-            <SearchBar defaultLocation="Lake Norman" buttonLabel="Search NC shops" />
+            <SearchBar defaultLocation="Raleigh, NC" buttonLabel="Search NC shops" />
           </div>
         </div>
       </section>

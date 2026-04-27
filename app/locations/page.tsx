@@ -16,7 +16,7 @@ import {
 export const metadata: Metadata = {
   title: "ChairRadar Coverage | Find Haircut Shops Near You",
   description:
-    "See where ChairRadar currently has real haircut shop coverage and how the lightweight haircut discovery model can expand market by market."
+    "See where ChairRadar currently has real haircut shop coverage and how the lightweight haircut discovery model can expand market by market across North Carolina and beyond."
 };
 
 export default function LocationsPage() {
@@ -34,7 +34,7 @@ export default function LocationsPage() {
               Find haircut shops by area.
             </h1>
             <p className="mt-5 max-w-3xl text-lg leading-8 text-[color:var(--muted)]">
-              ChairRadar is built to expand nationally, but local pages should stay useful. Current live coverage starts with real public shop listings in Charlotte and around Lake Norman.
+              ChairRadar is built to expand nationally, but local pages should stay useful. Current live coverage starts with real public shop listings in Raleigh, Charlotte, and around Lake Norman.
             </p>
             <div className="mt-8 max-w-3xl">
               <SearchBar buttonLabel="Search current coverage" />

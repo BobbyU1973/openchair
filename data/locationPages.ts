@@ -23,6 +23,8 @@ export type LocationPage = {
 
 const lakeNormanZipCodes = ["28117", "28115", "28031", "28078", "28037", "28673"];
 const lakeNormanCities = ["Mooresville", "Cornelius", "Huntersville", "Denver", "Sherrills Ford"];
+const raleighZipCodes = ["27603", "27607", "27609", "27612", "27615", "27617"];
+const raleighCities = ["Raleigh"];
 const charlotteZipCodes = ["28209", "28213", "28216", "28226", "28262", "28273", "28277", "28278"];
 const charlotteCities = ["Charlotte"];
 const currentUpdate = "Updated April 2026";
@@ -363,6 +365,174 @@ export const locationPages: LocationPage[] = [
     shopFilter: "all",
     lastUpdatedLabel: currentUpdate,
     relatedPageIds: ["denver-haircuts", "denver-walk-in-haircuts", "lake-norman-haircuts"]
+  },
+  {
+    id: "raleigh-haircuts",
+    segments: ["raleigh", "haircuts"],
+    href: "/nc/raleigh/haircuts",
+    areaName: "Raleigh, NC",
+    eyebrow: "Raleigh haircut guide",
+    heading: "Haircut availability in Raleigh, NC",
+    description:
+      "Find Raleigh haircut shops with direct call buttons, public booking links, walk-in signals, and directions.",
+    intro:
+      "ChairRadar helps Raleigh users compare nearby chain check-in pages and public shop listings quickly, then call, check in, book, or get directions from one page.",
+    metaTitle: "Haircut Availability in Raleigh, NC",
+    metaDescription:
+      "Find haircut shops in Raleigh, NC. Compare walk-in options, direct booking links, phone numbers, and directions with ChairRadar.",
+    searchLocation: "Raleigh, NC",
+    zipCodes: raleighZipCodes,
+    cityNames: raleighCities,
+    shopFilter: "all",
+    lastUpdatedLabel: currentUpdate,
+    relatedPageIds: ["raleigh-walk-in-haircuts", "raleigh-mens-haircuts", "raleigh-27615"]
+  },
+  {
+    id: "raleigh-walk-in-haircuts",
+    segments: ["raleigh", "walk-in-haircuts"],
+    href: "/nc/raleigh/walk-in-haircuts",
+    areaName: "Raleigh, NC",
+    eyebrow: "Raleigh walk-in guide",
+    heading: "Walk-in haircuts in Raleigh, NC",
+    description:
+      "Compare Raleigh shops with public walk-in or online check-in signals, direct call buttons, and directions.",
+    intro:
+      "For same-day haircut needs in Raleigh, ChairRadar filters toward shops that publicly signal walk-ins, online check-in, or quick call access.",
+    metaTitle: "Walk-In Haircuts in Raleigh, NC",
+    metaDescription:
+      "Need a walk-in haircut in Raleigh, NC? Compare shops, call directly, check in online, or get directions from ChairRadar.",
+    searchLocation: "Raleigh, NC",
+    zipCodes: raleighZipCodes,
+    cityNames: raleighCities,
+    shopFilter: "walkIns",
+    lastUpdatedLabel: currentUpdate,
+    relatedPageIds: ["raleigh-haircuts", "raleigh-27615", "raleigh-27617"]
+  },
+  {
+    id: "raleigh-kids-haircuts",
+    segments: ["raleigh", "kids-haircuts"],
+    href: "/nc/raleigh/kids-haircuts",
+    areaName: "Raleigh, NC",
+    eyebrow: "Raleigh kids haircut guide",
+    heading: "Kids haircut options in Raleigh, NC",
+    description:
+      "Compare Raleigh shops that publicly list kids cuts or family-friendly haircut options.",
+    intro:
+      "ChairRadar helps parents find Raleigh haircut shops that list kids cuts, then call, check in, or get directions quickly.",
+    metaTitle: "Kids Haircuts in Raleigh, NC",
+    metaDescription:
+      "Find kids haircut options in Raleigh, NC with direct call buttons, booking links, and directions on ChairRadar.",
+    searchLocation: "Raleigh, NC",
+    zipCodes: raleighZipCodes,
+    cityNames: raleighCities,
+    shopFilter: "kids",
+    lastUpdatedLabel: currentUpdate,
+    relatedPageIds: ["raleigh-haircuts", "raleigh-walk-in-haircuts", "raleigh-27603"]
+  },
+  {
+    id: "raleigh-mens-haircuts",
+    segments: ["raleigh", "mens-haircuts"],
+    href: "/nc/raleigh/mens-haircuts",
+    areaName: "Raleigh, NC",
+    eyebrow: "Raleigh men's haircut guide",
+    heading: "Men's haircuts and barbers in Raleigh, NC",
+    description:
+      "Find Raleigh men's haircut shops and barbershop-style options with public phone, check-in, booking, and directions links.",
+    intro:
+      "ChairRadar groups Raleigh men's haircut and boys cut options so users can compare public check-in, phone, and directions links fast.",
+    metaTitle: "Men's Haircuts and Barbers in Raleigh, NC",
+    metaDescription:
+      "Compare men's haircut and barber-style options in Raleigh, NC. See phone numbers, booking links, walk-ins, and directions.",
+    searchLocation: "Raleigh, NC",
+    zipCodes: raleighZipCodes,
+    cityNames: raleighCities,
+    shopFilter: "mens",
+    lastUpdatedLabel: currentUpdate,
+    relatedPageIds: ["raleigh-haircuts", "raleigh-walk-in-haircuts", "raleigh-27609"]
+  },
+  {
+    id: "raleigh-27615",
+    segments: ["raleigh", "27615"],
+    href: "/nc/raleigh/27615",
+    areaName: "27615",
+    eyebrow: "27615 haircut guide",
+    heading: "Haircut shops near 27615",
+    description:
+      "Find haircut shops near 27615 with direct phone numbers, public booking links, walk-in signals, and directions.",
+    intro:
+      "ChairRadar gives 27615 users a quick way to compare North Raleigh haircut options and move straight to a call, check-in page, or map.",
+    metaTitle: "Haircut Shops Near 27615",
+    metaDescription:
+      "Find haircut shops near 27615. Compare phone numbers, booking links, walk-in options, and directions with ChairRadar.",
+    searchLocation: "27615",
+    zipCodes: ["27615"],
+    cityNames: ["Raleigh"],
+    shopFilter: "all",
+    lastUpdatedLabel: currentUpdate,
+    relatedPageIds: ["raleigh-haircuts", "raleigh-walk-in-haircuts", "raleigh-mens-haircuts"]
+  },
+  {
+    id: "raleigh-27617",
+    segments: ["raleigh", "27617"],
+    href: "/nc/raleigh/27617",
+    areaName: "27617",
+    eyebrow: "27617 haircut guide",
+    heading: "Haircut shops near 27617",
+    description:
+      "Find haircut shops near 27617 with direct phone numbers, public booking links, walk-in signals, and directions.",
+    intro:
+      "ChairRadar helps 27617 users compare Brier Creek-area haircut options with direct phone, check-in, and directions links.",
+    metaTitle: "Haircut Shops Near 27617",
+    metaDescription:
+      "Find haircut shops near 27617. Compare phone numbers, booking links, walk-in options, and directions with ChairRadar.",
+    searchLocation: "27617",
+    zipCodes: ["27617"],
+    cityNames: ["Raleigh"],
+    shopFilter: "all",
+    lastUpdatedLabel: currentUpdate,
+    relatedPageIds: ["raleigh-haircuts", "raleigh-walk-in-haircuts", "raleigh-27615"]
+  },
+  {
+    id: "raleigh-27603",
+    segments: ["raleigh", "27603"],
+    href: "/nc/raleigh/27603",
+    areaName: "27603",
+    eyebrow: "27603 haircut guide",
+    heading: "Haircut shops near 27603",
+    description:
+      "Find haircut shops near 27603 with direct phone numbers, public booking links, walk-in signals, and directions.",
+    intro:
+      "ChairRadar gives 27603 users a fast way to compare South Raleigh haircut options from one mobile-friendly page.",
+    metaTitle: "Haircut Shops Near 27603",
+    metaDescription:
+      "Find haircut shops near 27603. Compare phone numbers, booking links, walk-in options, and directions with ChairRadar.",
+    searchLocation: "27603",
+    zipCodes: ["27603"],
+    cityNames: ["Raleigh"],
+    shopFilter: "all",
+    lastUpdatedLabel: currentUpdate,
+    relatedPageIds: ["raleigh-haircuts", "raleigh-kids-haircuts", "raleigh-27617"]
+  },
+  {
+    id: "raleigh-27609",
+    segments: ["raleigh", "27609"],
+    href: "/nc/raleigh/27609",
+    areaName: "27609",
+    eyebrow: "27609 haircut guide",
+    heading: "Haircut shops near 27609",
+    description:
+      "Find haircut shops near 27609 with public phone numbers, check-in links, walk-in signals, and directions.",
+    intro:
+      "ChairRadar helps 27609 users compare nearby haircut shops around North Hills and Falls of Neuse from one clean page.",
+    metaTitle: "Haircut Shops Near 27609",
+    metaDescription:
+      "Find haircut shops near 27609. Compare phone numbers, booking links, walk-in options, and directions with ChairRadar.",
+    searchLocation: "27609",
+    zipCodes: ["27609"],
+    cityNames: ["Raleigh"],
+    shopFilter: "all",
+    lastUpdatedLabel: currentUpdate,
+    relatedPageIds: ["raleigh-haircuts", "raleigh-mens-haircuts", "raleigh-27615"]
   },
   {
     id: "charlotte-haircuts",
