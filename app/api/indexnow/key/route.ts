@@ -2,15 +2,10 @@ import { getIndexNowKey } from "@/lib/indexnow";
 
 export const dynamic = "force-dynamic";
 
-export async function GET(
-  _request: Request,
-  context: { params: Promise<Record<string, string | string[] | undefined>> }
-) {
-  const params = await context.params;
-  const key = Array.isArray(params.key) ? params.key[0] : params.key;
+export function GET() {
   const configuredKey = getIndexNowKey();
 
-  if (!configuredKey || key !== configuredKey) {
+  if (!configuredKey) {
     return new Response("Not found.", {
       status: 404,
       headers: {
@@ -24,7 +19,8 @@ export async function GET(
     status: 200,
     headers: {
       "Content-Type": "text/plain; charset=utf-8",
-      "Cache-Control": "public, max-age=3600"
+      "Cache-Control": "public, max-age=3600",
+      "X-Robots-Tag": "noindex"
     }
   });
 }
