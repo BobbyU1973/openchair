@@ -5,6 +5,7 @@ import { SiteFooter } from "@/components/SiteFooter";
 import { ShopCard } from "@/components/ShopCard";
 import { locationPages } from "@/data/locationPages";
 import { shops } from "@/data/shops";
+import { getHomeStructuredData } from "@/lib/structuredData";
 
 const popularSearchPageIds = [
   "charlotte-haircuts",
@@ -27,9 +28,14 @@ const popularSearchPages = popularSearchPageIds
 
 export default function HomePage() {
   const featuredShops = shops.slice(0, 3);
+  const structuredData = getHomeStructuredData();
 
   return (
     <main>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData) }}
+      />
       <Header />
       <Hero />
 

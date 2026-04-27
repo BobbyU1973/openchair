@@ -7,6 +7,47 @@ type BreadcrumbItem = {
   url: string;
 };
 
+export function getHomeStructuredData() {
+  const organizationId = `${SITE_URL}/#organization`;
+  const websiteId = `${SITE_URL}/#website`;
+
+  return [
+    {
+      "@context": "https://schema.org",
+      "@type": "Organization",
+      "@id": organizationId,
+      name: "ChairRadar",
+      url: SITE_URL,
+      description:
+        "ChairRadar helps people find nearby haircut shops fast with public phone numbers, booking links, walk-in info, and directions.",
+      areaServed: {
+        "@type": "State",
+        name: "North Carolina"
+      }
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "WebSite",
+      "@id": websiteId,
+      url: SITE_URL,
+      name: "ChairRadar",
+      description:
+        "Find a haircut near you fast with nearby haircut shops, public booking links, call buttons, and directions.",
+      publisher: {
+        "@id": organizationId
+      },
+      potentialAction: {
+        "@type": "SearchAction",
+        target: {
+          "@type": "EntryPoint",
+          urlTemplate: `${SITE_URL}/search?location={search_term_string}`
+        },
+        "query-input": "required name=search_term_string"
+      }
+    }
+  ];
+}
+
 function formatTelephone(phone: string) {
   const digits = phone.replace(/\D/g, "");
   return digits.length === 10 ? `+1${digits}` : phone;

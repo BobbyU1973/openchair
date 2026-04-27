@@ -3,4 +3,5 @@ node_modules
 dist
 out
 *.log
+*.tsbuildinfo
 outbound-smoke*.log
